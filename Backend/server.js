@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: "recyclelabanon.netlify.app",
     methods: "GET, POST, PUT, DELETE",
     optionsSuccessStatus: 200, // Some legacy browsers (IE11, various versions of Android) choke on 204
     credentials: true,
