@@ -37,7 +37,7 @@ const Donate = () => {
 
     try {
       await sendRequest(
-        'http://localhost:4000/api/donation',
+        'https://recyclelabanonweb.onrender.com/api/donation',
         'POST',
         donationData
       );

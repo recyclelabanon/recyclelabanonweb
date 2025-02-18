@@ -33,7 +33,7 @@ const PartnerForm = ({ onSuccess }) => {
       
 
       await sendRequest(
-        'http://localhost:4000/api/partner',
+        'https://recyclelabanonweb.onrender.com/api/partner',
         'POST',
         payload
       );

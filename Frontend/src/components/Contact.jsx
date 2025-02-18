@@ -64,7 +64,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendRequest("http://localhost:4000/api/contact", "POST", formData);
+      await sendRequest("https://recyclelabanonweb.onrender.com/api/contact", "POST", formData);
       setSuccessMessage("Your message has been sent successfully! 🎉");
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => {

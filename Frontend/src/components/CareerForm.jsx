@@ -30,7 +30,7 @@ const CareerForm = ({ onSuccess }) => {
       formPayload.append('resume', formData.resume);
       formPayload.append('coverLetter', formData.message);
 
-      await sendRequest('http://localhost:4000/api/career', 'POST', formPayload);
+      await sendRequest('https://recyclelabanonweb.onrender.com/api/career', 'POST', formPayload);
 
       onSuccess();
       setFormData({

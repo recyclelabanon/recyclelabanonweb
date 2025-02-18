@@ -32,7 +32,7 @@ const VolunteerForm = ({ onSuccess }) => {
       };
 
       await sendRequest(
-        'http://localhost:4000/api/volunteer',
+        'https://recyclelabanonweb.onrender.com/api/volunteer',
         'POST',
         payload
       );
