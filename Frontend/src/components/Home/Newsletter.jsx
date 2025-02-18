@@ -10,7 +10,7 @@ const Newsletter = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendRequest("http://localhost:4000/api/subscribe", "POST", { email });
+      await sendRequest("https://recyclelabanonweb.onrender.com/api/subscribe", "POST", { email });
       setSuccessMessage("You have subscribed successfully! 🎉");
       setEmail(""); // Clear form after submission
       setTimeout(() => {
