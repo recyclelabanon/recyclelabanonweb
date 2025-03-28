@@ -12,13 +12,12 @@ const Navbar = () => {
     { name: 'About Us', fullName: 'Founding Roots', description: 'About Us', path: '/about' },
     { name: 'Initiatives', fullName: 'Ecological Programmes', description: 'Initiatives', path: '/initiatives' },
     { name: 'Team', fullName: 'Collective Exchange', description: 'Team & Join us', path: '/team' },
-    // { name: 'Partners', fullName: 'Allies and Benefactors', description: 'Partners and Donors', path: '/partners' },
     { name: 'News', fullName: 'Whispering Winds', description: 'Newsroom/Press & Media', path: '/news' },
-    //{ name: 'Blog', fullName: 'Reflections', description: 'Newsletter & blog', path: '/blog' },
-    // { name: 'Events', fullName: 'Time Trail', description: 'Calendar & Events', path: '/events' },
-    //{ name: 'Impact', fullName: 'Impact', description: 'Transparency & Annual Report', path: '/impact' },
+    { name: 'Blog', fullName: 'Reflections', description: 'Newsletter & blog', path: '/blog' },
+    { name: 'Events', fullName: 'Time Trail', description: 'Calendar & Events', path: '/events' },
+    { name: 'Impact', fullName: 'Impact', description: 'Transparency & Annual Report', path: '/impact' },
     { name: 'Contact', fullName: 'Sow a Connection', description: 'Contact Us', path: '/contacts' },
-  //   { name: 'Support', fullName: 'Grow with Us', description: 'Donate & Support', path: '/support' }
+    { name: 'Donate', fullName: 'Grow a Tree', description: 'Donate', path: '/donate' }
   ];
 
   const handleNavigation = (path) => {

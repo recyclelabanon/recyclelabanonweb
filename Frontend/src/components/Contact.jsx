@@ -19,11 +19,11 @@ const Contact = () => {
       name: "Regenerate Hub",
       color: "green",
       location: [
-        "Makdassi St, Anwar Al Khalil Bldg,",
+        "Saint Louise Street,",
         "Corner Facing Edisson Roastery,",
         "Hamra, Beirut, Lebanon",
       ],
-      phone: "+961 71 131 115",
+      phone: "+961 76 0090644",
       email: "connect@regeneratehub.org",
       hours: "Mon - Fri 10am - 5pm",
       website: "https://www.regeneratehub.org",
@@ -37,23 +37,23 @@ const Contact = () => {
         "Corner Facing Edisson Roastery,",
         "Hamra, Beirut, Lebanon",
       ],
-      phone: "+961 76 306 400",
+      phone: "+961 76 009 355",
       email: "connect@ecosouk.net",
       hours: "Mon - Sat 10am - 5pm",
       website: "https://ecosouk.net",
     },
     {
       id: 3,
-      name: "Recycle Lebanon",
+      name: "TerraPods",
       color: "green",
       location: [
-        "Saint Louise Street, Kehdy Building,",
-        "1st Floor, Fassouh, Beirut, Lebanon",
+        "Hay EI Ghabe, Baskinta,",
+        "Metn, Beirut, Lebanon",
       ],
-      phone: "+961 1 123 456",
-      email: "connect@recyclelebanon.org",
+      phone: "+961 76 009 44",
+      email: "connect@terrapods.org",
       hours: "Mon - Fri 9am - 6pm",
-      website: "https://recyclelebanon.org",
+      website: "https://terrapods.org",
     },
   ];
 
@@ -84,7 +84,7 @@ const Contact = () => {
             Sow a Connection
           </h1>
           <p className="text-xl text-gray-600">
-            Building a Sustainable Future Together
+            Growing a regenerative future
           </p>
         </div>
 
@@ -146,7 +146,7 @@ const Contact = () => {
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <h3 className="font-semibold mb-3 text-green-600">
                   <Clock className="w-5 h-5 inline-block mr-2" />
-                  Work Hours
+                  Shop Hours
                 </h3>
                 <p className="text-gray-600 text-sm">Mon-Fri: 9AM - 6PM</p>
               </div>
@@ -226,7 +226,7 @@ const Contact = () => {
         </div>
         <div className="space-y-6 md:py-16" >
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Our Organizations
+                Our Programmes
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {organizations.map((org) => (

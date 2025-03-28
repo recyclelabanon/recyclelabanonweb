@@ -23,7 +23,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-green-50 py-16">
+    <section className="bg-green-100 py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Receive whispers of change</h2>
@@ -42,7 +42,7 @@ const Newsletter = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="flex-1 px-4 py-3 rounded-lg border bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
               required
               disabled={loading}
             />

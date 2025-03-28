@@ -11,13 +11,13 @@ const Home = () => {
   return (
     <div>
       <Hero />
+      <Donate />
       <Mission />
-      <Newsletter />
-      <Quote />
       <Work />
       <Participate />
       <HireUs />
-      <Donate />
+      <Newsletter />
+      <Quote />
     </div>
   );
 };
