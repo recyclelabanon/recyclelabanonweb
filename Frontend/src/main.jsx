@@ -10,6 +10,7 @@ import Team from "./Pages/Team.jsx";
 import Contacts from "./Pages/Contact.jsx";
 import Newsroom from "./Pages/News.jsx";
 import JoinUs from "./components/JoinUs.jsx";
+import InitiativesDetails from "./components/InitiativesDetails.jsx";
 // import About from "./Pages/About.jsx";
 // import Contact from "./components/Contact/Contact.jsx";
 // import Thematic from "./Pages/Thematic.jsx";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/initiatives",
         element: <Initiatives />,
+      },
+      {
+        path: "/initiatives/:id",
+        element: <InitiativesDetails />,
       },
       {
         path: "/team",
