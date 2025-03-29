@@ -3,6 +3,7 @@ import Section from '../components/Section';
 import TeamMember from '../components/TeamMember';
 import Partners from '../components/Partners';
 import { useNavigate } from 'react-router-dom';
+import { img16, img28, img30 } from '../assets/Image';
 
 const Team = () => {
   const navigate = useNavigate();
@@ -16,19 +17,19 @@ const Team = () => {
       name: 'Dr. Rachel Rosenbaum',
       role: 'Regenerate Hub Product & Data Coordinator',
       description: 'An anthropologist at the University of Arizona, focusing on the politics of infrastructure & circular economy solutions.',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      image: img30
     },
     {
       name: 'Nariman Hamdan',
       role: 'EcoSouk Store Manager',
       description: 'An environmental activist, retailer & marathon runner with a resourceful passion for supporting communities. Active blood donor & volunteers with the Lebanese Red Cross & Civil Defense.',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      image: img28
     },
     {
       name: 'Kevin Matar',
       role: 'TerraPods Lead',
       description: 'An environmental architect & activist with a specialisation in Advanced Ecological Buildings & Biocities. Exploring materials, completed research programme on mycelium & construction waste.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+      image: img16
     },
   ];
 

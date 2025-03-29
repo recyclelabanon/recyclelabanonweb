@@ -109,3 +109,47 @@
   .group:hover .program-title {
     @apply text-green-500;
   }
+
+
+  /* Custom calendar overrides */
+.modern-calendar {
+  --rbc-border: 1px solid #f3f4f6;
+  --rbc-header-bg: #ffffff;
+  --rbc-today-bg: #f0fdf4;
+}
+
+.rbc-month-view,
+.rbc-time-view,
+.rbc-agenda-view {
+  border-radius: 12px;
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+}
+
+.rbc-header {
+  padding: 12px;
+  font-weight: 500;
+  color: #374151;
+  background: var(--rbc-header-bg);
+}
+
+.rbc-day-bg + .rbc-day-bg,
+.rbc-header + .rbc-header {
+  border-left: var(--rbc-border);
+}
+
+.rbc-month-row + .rbc-month-row {
+  border-top: var(--rbc-border);
+}
+
+.rbc-off-range-bg {
+  background: #f9fafb;
+}
+
+.rbc-today {
+  background-color: var(--rbc-today-bg);
+}
+
+.rbc-event-content {
+  font-weight: 500;
+}

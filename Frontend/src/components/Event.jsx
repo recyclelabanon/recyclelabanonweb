@@ -1,109 +1,124 @@
+// components/Events.jsx
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import { allEvents } from '../Data/EventData';
+import EventCalendar from './EventCalendar';
+import EventRegistrationForm from './EventRegistrationForm';
+import EventCard from './EventCard';
+import Modal from './Modal';
 
-const Event = ({ upcomingEvents, pastEvents }) => {
+const Events = () => {
+  const [viewMode, setViewMode] = useState('list');
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showRegistration, setShowRegistration] = useState(false);
+  const navigate = useNavigate();
+
+  // Event filtering logic
+  const now = new Date("2024-04-18");
+  const currentEvents = allEvents.filter(e => new Date(e.start) <= now && new Date(e.end) >= now);
+  const upcomingEvents = allEvents.filter(e => new Date(e.start) > now && e.status !== 'current');
+  const pastEvents = allEvents.filter(e => new Date(e.end) < now);
+
+  console.log('Current Events:', currentEvents);
+  console.log('Upcoming Events:', upcomingEvents);
+
+  const handleSelectEvent = (event) => {
+    navigate(`/events/${event.resource.id}`);
+  };
+
+  const handleRegisterClick = (event) => {
+    setSelectedEvent(event);
+    setShowRegistration(true);
+  };
+
   return (
-    <div className="  p-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Events</h2>
-
-      {/* Upcoming Events */}
-      <div className="mb-8">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          Upcoming Events
-        </h3>
-        {upcomingEvents && upcomingEvents.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {upcomingEvents.map((event, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                whileHover={{ scale: 1.02 }}
-              >
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                    {event.title}
-                  </h4>
-                  <p className="text-gray-600 mb-2">{event.description}</p>
-                  <p className="text-sm text-gray-500 mb-4">
-                    Date: {event.date} | Location: {event.location}
-                  </p>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300">
-                    Register Now
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+    <div className="pt-16">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* View Toggle */}
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900">Events Calendar</h2>
+          <div className="flex gap-4">
+            <button 
+              onClick={() => setViewMode('list')} 
+              className={`px-4 py-2 rounded-2xl ${viewMode === 'list' ? 'bg-green-400 text-white hover:bg-green-700' : 'bg-gray-200 hover:bg-gray-300'}`}
+            >
+              List View
+            </button>
+            <button 
+              onClick={() => setViewMode('calendar')} 
+              className={`px-4 py-2 rounded-2xl ${viewMode === 'calendar' ? 'bg-green-400 text-white hover:bg-green-700' : 'bg-gray-200 hover:bg-gray-300'}`}
+            >
+              Calendar
+            </button>
           </div>
+        </div>
+
+        {/* Content */}
+        {viewMode === 'calendar' ? (
+          <EventCalendar 
+            events={allEvents.map(e => ({
+              title: e.title,
+              start: new Date(e.start),
+              end: new Date(e.end),
+              resource: e
+            }))} 
+            onSelectEvent={handleSelectEvent}
+          />
         ) : (
-          <p className="text-gray-600">No upcoming events. Stay tuned!</p>
+          <>
+            <EventSection 
+              title="Current Events" 
+              events={currentEvents} 
+              onRegister={handleRegisterClick} 
+            />
+            <EventSection 
+              title="Upcoming Events" 
+              events={upcomingEvents} 
+              onRegister={handleRegisterClick} 
+            />
+            <EventSection 
+              title="Past Events" 
+              events={pastEvents} 
+            />
+          </>
         )}
-      </div>
 
-      {/* Past Events */}
-      <div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          Past Events
-        </h3>
-        {pastEvents && pastEvents.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {pastEvents.map((event, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                whileHover={{ scale: 1.02 }}
-              >
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                    {event.title}
-                  </h4>
-                  <p className="text-gray-600 mb-2">{event.description}</p>
-                  <p className="text-sm text-gray-500 mb-4">
-                    Date: {event.date} | Location: {event.location}
-                  </p>
-                  <button className="mt-4 text-green-600 font-medium hover:text-green-700 transition-colors">
-                Learn more →
-              </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        {/* Registration Modal */}
+        <Modal isOpen={showRegistration} onClose={() => setShowRegistration(false)}>
+          {selectedEvent && <EventRegistrationForm event={selectedEvent} />}
+        </Modal>
+      </div>
+    </div>
+  );
+};
+
+const EventSection = ({ title, events, onRegister }) => {
+  console.log(`Rendering ${title} with events:`, events);
+  return (
+    <div className="mb-12">
+      <h3 className="text-xl font-semibold text-gray-800 mb-6">{title}</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {events.length > 0 ? (
+          events.map(event => (
+            <EventCard 
+              key={event.id} 
+              event={event} 
+              onRegister={onRegister ? () => onRegister(event) : null}
+            />
+          ))
         ) : (
-          <p className="text-gray-600">No past events available.</p>
+          <p className="text-gray-600">No events available</p>
         )}
       </div>
     </div>
   );
 };
 
-Event.propTypes = {
-  upcomingEvents: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    })
-  ),
-  pastEvents: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    })
-  ),
+EventSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  events: PropTypes.array.isRequired,
+  onRegister: PropTypes.func,
 };
 
-export default Event;
+export default Events;

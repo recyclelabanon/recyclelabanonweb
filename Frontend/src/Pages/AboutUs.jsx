@@ -1,4 +1,4 @@
-import { img34 } from '../assets/Image';
+import { img10, img12, img34, img41 } from '../assets/Image';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
 
@@ -74,28 +74,28 @@ const AboutUs = () => {
     {
       title: "RegenerateHub",
       description: "Propels data driven community engagement, fostering climate-driven practices and resilient ecosystems.",
-      logo: {img34}, // Replace with your actual logo path
+      logo: img34,
       bgColor: "bg-green-50",
       hoverColor: "hover:bg-green-100"
     },
     {
       title: "EcoSouk",
       description: "Nurtures conscious living and local economies, connecting makers and consumers.",
-      logo: "/logos/ecosouk-logo.png",
+      logo: img12,
       bgColor: "bg-green-50",
       hoverColor: "hover:bg-green-100"
     },
     {
       title: "TerraPods",
       description: "Fosters innovation and self sufficiency through STEAM-driven collaboration.",
-      logo: "/logos/terrapods-logo.png",
+      logo: img41,
       bgColor: "bg-green-50",
       hoverColor: "hover:bg-green-100"
     },
     {
       title: "Dive Into Action",
       description: "Sparks a transformative shift toward environmental conscious actions.",
-      logo: "/logos/diveintoaction-logo.png",
+      logo: img10,
       bgColor: "bg-green-50",
       hoverColor: "hover:bg-green-100"
     }
@@ -175,7 +175,7 @@ const AboutUs = () => {
                 className={`${program.bgColor} ${program.hoverColor} rounded-lg p-6 transition-all duration-300 hover:shadow-md flex flex-col cursor-pointer`}
               >
                 <div className="flex items-center mb-4">
-                  <div className="w-16 h-16 mr-4 flex-shrink-0">
+                  <div className="w-16 h-16 mr-4 flex-shrink-0 bg-white rounded-full shadow-md flex items-center justify-center p-2">
                     <img
                       src={program.logo}
                       alt={`${program.title} logo`}
