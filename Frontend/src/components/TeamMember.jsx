@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const TeamMember = ({ name, role, description, image }) => {
   return (
-    <div className="w-72 bg-white rounded-2xl shadow-lg overflow-hidden relative text-center">
+    <div className="w-72 bg-white hover:scale-105 transition duration-300 rounded-2xl shadow-lg overflow-hidden relative text-center">
       {/* Top Gradient Background */}
       <div className="h-42 bg-gradient-to-b from-green-500 to-red-700 relative flex justify-center items-end">
         {/* Profile Image */}

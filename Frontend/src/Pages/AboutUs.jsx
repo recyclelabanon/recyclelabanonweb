@@ -1,3 +1,4 @@
+import { img34 } from '../assets/Image';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
 
@@ -73,7 +74,7 @@ const AboutUs = () => {
     {
       title: "RegenerateHub",
       description: "Propels data driven community engagement, fostering climate-driven practices and resilient ecosystems.",
-      logo: "/logos/regeneratehub-logo.png", // Replace with your actual logo path
+      logo: {img34}, // Replace with your actual logo path
       bgColor: "bg-green-50",
       hoverColor: "hover:bg-green-100"
     },

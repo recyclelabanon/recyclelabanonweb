@@ -15,7 +15,6 @@ const Navbar = () => {
     { name: 'News', fullName: 'Whispering Winds', description: 'Newsroom/Press & Media', path: '/news' },
     { name: 'Blog', fullName: 'Reflections', description: 'Newsletter & blog', path: '/blog' },
     { name: 'Events', fullName: 'Time Trail', description: 'Calendar & Events', path: '/events' },
-    { name: 'Impact', fullName: 'Impact', description: 'Transparency & Annual Report', path: '/impact' },
     { name: 'Contact', fullName: 'Sow a Connection', description: 'Contact Us', path: '/contacts' },
     { name: 'Donate', fullName: 'Grow a Tree', description: 'Donate', path: '/donate' }
   ];

@@ -133,8 +133,6 @@ const Newsroom = () => {
           <Event upcomingEvents={upcomingEvents} pastEvents={pastEvents} />
           <Blog blogs={blogs} />
         </div>
-
-        
       </div>
     </div>
   );

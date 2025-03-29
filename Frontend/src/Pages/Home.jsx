@@ -6,6 +6,7 @@ import Work from "../components/Home/Work";
 import Newsletter from "../components/Home/Newsletter";
 import HireUs from "../components/Home/HireUs";
 import Donate from "../components/Home/Donate";
+import VideoModal from "../components/VideoSection";
 
 const Home = () => {
   return (
@@ -17,6 +18,10 @@ const Home = () => {
       <Participate />
       <HireUs />
       <Newsletter />
+      <VideoModal 
+        videoUrl="https://player.vimeo.com/video/907802321"
+        title="Recycle Labanon" 
+        onClose />
       <Quote />
     </div>
   );
