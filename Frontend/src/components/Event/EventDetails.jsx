@@ -1,9 +1,8 @@
-// components/events/EventDetails.jsx
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import EventTimeline from './EventTimeline';
-import EventRegistrationForm from '../EventRegistrationForm';
+import EventRegistrationForm from './EventRegistrationForm';
 
 const gallerySettings = {
   dots: true,

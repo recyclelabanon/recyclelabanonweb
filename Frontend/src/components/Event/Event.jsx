@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { allEvents } from '../Data/EventData';
+import { allEvents } from '../../Data/EventData';
 import EventCalendar from './EventCalendar';
 import EventRegistrationForm from './EventRegistrationForm';
 import EventCard from './EventCard';
@@ -20,8 +20,6 @@ const Events = () => {
   const upcomingEvents = allEvents.filter(e => new Date(e.start) > now && e.status !== 'current');
   const pastEvents = allEvents.filter(e => new Date(e.end) < now);
 
-  console.log('Current Events:', currentEvents);
-  console.log('Upcoming Events:', upcomingEvents);
 
   const handleSelectEvent = (event) => {
     navigate(`/events/${event.resource.id}`);

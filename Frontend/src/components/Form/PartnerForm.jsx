@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import useApi from '../Hooks/useApi';
 import PropTypes from 'prop-types';
+import useApi from '../../Hooks/useApi';
 
-const VolunteerForm = ({ onSuccess }) => {
+const PartnerForm = ({ onSuccess }) => {
   const { sendRequest } = useApi();
   const [formData, setFormData] = useState({
-    name: '',
+    organization: '',
+    contactPerson: '',
     email: '',
-    availability: '',
-    interest: '',
+    phone: '',
     message: '',
   });
 
@@ -24,25 +24,27 @@ const VolunteerForm = ({ onSuccess }) => {
     e.preventDefault();
     try {
       const payload = {
-        fullName: formData.name,
+        organizationName: formData.organization,
+        contactPerson: formData.contactPerson,
         email: formData.email,
-        availability: formData.availability.toLowerCase(),
-        areaOfInterest: formData.interest,
-        motivation: formData.message,
+        phone: formData.phone,
+        partnershipInterest: formData.message,
       };
+      
 
       await sendRequest(
-        'https://recyclelabanonweb.onrender.com/api/volunteer',
+        'https://recyclelabanonweb.onrender.com/api/partner',
         'POST',
         payload
       );
+      
 
       onSuccess();
       setFormData({
-        name: '',
+        organization: '',
+        contactPerson: '',
         email: '',
-        availability: '',
-        interest: '',
+        phone: '',
         message: '',
       });
     } catch (error) {
@@ -54,12 +56,23 @@ const VolunteerForm = ({ onSuccess }) => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-gray-700 mb-2">Full Name</label>
+          <label className="block text-gray-700 mb-2">Organization Name</label>
           <input
             type="text"
-            name="name"
+            name="organization"
             required
-            value={formData.name}
+            value={formData.organization}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-2">Contact Person</label>
+          <input
+            type="text"
+            name="contactPerson"
+            required
+            value={formData.contactPerson}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
@@ -76,37 +89,18 @@ const VolunteerForm = ({ onSuccess }) => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">Availability</label>
-          <select
-            name="availability"
+          <label className="block text-gray-700 mb-2">Phone</label>
+          <input
+            type="tel"
+            name="phone"
             required
-            value={formData.availability}
+            value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-          >
-            <option value="">Select Availability</option>
-            <option value="weekdays">Weekdays</option>
-            <option value="weekends">Weekends</option>
-            <option value="both">Both</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-gray-700 mb-2">Areas of Interest</label>
-          <select
-            name="interest"
-            required
-            value={formData.interest}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-          >
-            <option value="">Select Interest</option>
-            <option value="Tree Planting Initiative">Tree Planting Initiative</option>
-            <option value="Community Education Program">Community Education Program</option>
-            <option value="Digital Marketing Support">Digital Marketing Support</option>
-          </select>
+          />
         </div>
         <div className="col-span-full">
-          <label className="block text-gray-700 mb-2">Why do you want to volunteer?</label>
+          <label className="block text-gray-700 mb-2">Partnership Interest</label>
           <textarea
             name="message"
             required
@@ -114,6 +108,7 @@ const VolunteerForm = ({ onSuccess }) => {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             rows={4}
+            placeholder="Tell us about your organization..."
           />
         </div>
       </div>
@@ -121,13 +116,13 @@ const VolunteerForm = ({ onSuccess }) => {
         type="submit"
         className="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
       >
-        Submit Application
+        Submit Partnership Request
       </button>
     </form>
   );
 };
-VolunteerForm.propTypes = {
+PartnerForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
 };
 
-export default VolunteerForm;
+export default PartnerForm;

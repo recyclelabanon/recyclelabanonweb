@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Briefcase, Heart, Handshake } from 'lucide-react';
-import CareerForm from './CareerForm';
-import VolunteerForm from './VolunteerForm';
-import PartnerForm from './PartnerForm';
+import CareerForm from './Form/CareerForm';
+import VolunteerForm from './Form/VolunteerForm';
+import PartnerForm from './Form/PartnerForm';
 
 const JoinUs = () => {
   const [activeTab, setActiveTab] = useState('careers');

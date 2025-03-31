@@ -1,50 +1,43 @@
 import { useState } from 'react';
+import useApi from '../../Hooks/useApi';
 import PropTypes from 'prop-types';
-import useApi from '../Hooks/useApi';
 
-const PartnerForm = ({ onSuccess }) => {
+const CareerForm = ({ onSuccess }) => {
   const { sendRequest } = useApi();
   const [formData, setFormData] = useState({
-    organization: '',
-    contactPerson: '',
+    name: '',
     email: '',
-    phone: '',
+    position: '',
+    resume: null,
     message: '',
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: files ? files[0] : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const payload = {
-        organizationName: formData.organization,
-        contactPerson: formData.contactPerson,
-        email: formData.email,
-        phone: formData.phone,
-        partnershipInterest: formData.message,
-      };
-      
+      const formPayload = new FormData();
+      formPayload.append('fullName', formData.name);
+      formPayload.append('email', formData.email);
+      formPayload.append('position', formData.position);
+      formPayload.append('resume', formData.resume);
+      formPayload.append('coverLetter', formData.message);
 
-      await sendRequest(
-        'https://recyclelabanonweb.onrender.com/api/partner',
-        'POST',
-        payload
-      );
-      
+      await sendRequest('https://recyclelabanonweb.onrender.com/api/career', 'POST', formPayload);
 
       onSuccess();
       setFormData({
-        organization: '',
-        contactPerson: '',
+        name: '',
         email: '',
-        phone: '',
+        position: '',
+        resume: null,
         message: '',
       });
     } catch (error) {
@@ -56,23 +49,12 @@ const PartnerForm = ({ onSuccess }) => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-gray-700 mb-2">Organization Name</label>
+          <label className="block text-gray-700 mb-2">Full Name</label>
           <input
             type="text"
-            name="organization"
+            name="name"
             required
-            value={formData.organization}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 mb-2">Contact Person</label>
-          <input
-            type="text"
-            name="contactPerson"
-            required
-            value={formData.contactPerson}
+            value={formData.name}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
@@ -89,18 +71,33 @@ const PartnerForm = ({ onSuccess }) => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">Phone</label>
-          <input
-            type="tel"
-            name="phone"
+          <label className="block text-gray-700 mb-2">Position</label>
+          <select
+            name="position"
             required
-            value={formData.phone}
+            value={formData.position}
             onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          >
+            <option value="">Select Position</option>
+            <option value="Environmental Project Manager">Environmental Project Manager</option>
+            <option value="Community Outreach Coordinator">Community Outreach Coordinator</option>
+            <option value="Sustainability Consultant">Sustainability Consultant</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-2">Resume</label>
+          <input
+            type="file"
+            name="resume"
+            required
+            onChange={handleChange}
+            accept=".pdf,.doc,.docx"
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
         </div>
         <div className="col-span-full">
-          <label className="block text-gray-700 mb-2">Partnership Interest</label>
+          <label className="block text-gray-700 mb-2">Cover Letter</label>
           <textarea
             name="message"
             required
@@ -108,7 +105,6 @@ const PartnerForm = ({ onSuccess }) => {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             rows={4}
-            placeholder="Tell us about your organization..."
           />
         </div>
       </div>
@@ -116,13 +112,13 @@ const PartnerForm = ({ onSuccess }) => {
         type="submit"
         className="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
       >
-        Submit Partnership Request
+        Submit Application
       </button>
     </form>
   );
 };
-PartnerForm.propTypes = {
+CareerForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
 };
 
-export default PartnerForm;
+export default CareerForm;

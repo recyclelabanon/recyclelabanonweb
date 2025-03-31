@@ -1,43 +1,48 @@
 import { useState } from 'react';
-import useApi from '../Hooks/useApi';
+import useApi from '../../Hooks/useApi';
 import PropTypes from 'prop-types';
 
-const CareerForm = ({ onSuccess }) => {
+const VolunteerForm = ({ onSuccess }) => {
   const { sendRequest } = useApi();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    position: '',
-    resume: null,
+    availability: '',
+    interest: '',
     message: '',
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formPayload = new FormData();
-      formPayload.append('fullName', formData.name);
-      formPayload.append('email', formData.email);
-      formPayload.append('position', formData.position);
-      formPayload.append('resume', formData.resume);
-      formPayload.append('coverLetter', formData.message);
+      const payload = {
+        fullName: formData.name,
+        email: formData.email,
+        availability: formData.availability.toLowerCase(),
+        areaOfInterest: formData.interest,
+        motivation: formData.message,
+      };
 
-      await sendRequest('https://recyclelabanonweb.onrender.com/api/career', 'POST', formPayload);
+      await sendRequest(
+        'https://recyclelabanonweb.onrender.com/api/volunteer',
+        'POST',
+        payload
+      );
 
       onSuccess();
       setFormData({
         name: '',
         email: '',
-        position: '',
-        resume: null,
+        availability: '',
+        interest: '',
         message: '',
       });
     } catch (error) {
@@ -71,33 +76,37 @@ const CareerForm = ({ onSuccess }) => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">Position</label>
+          <label className="block text-gray-700 mb-2">Availability</label>
           <select
-            name="position"
+            name="availability"
             required
-            value={formData.position}
+            value={formData.availability}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           >
-            <option value="">Select Position</option>
-            <option value="Environmental Project Manager">Environmental Project Manager</option>
-            <option value="Community Outreach Coordinator">Community Outreach Coordinator</option>
-            <option value="Sustainability Consultant">Sustainability Consultant</option>
+            <option value="">Select Availability</option>
+            <option value="weekdays">Weekdays</option>
+            <option value="weekends">Weekends</option>
+            <option value="both">Both</option>
           </select>
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">Resume</label>
-          <input
-            type="file"
-            name="resume"
+          <label className="block text-gray-700 mb-2">Areas of Interest</label>
+          <select
+            name="interest"
             required
+            value={formData.interest}
             onChange={handleChange}
-            accept=".pdf,.doc,.docx"
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-          />
+          >
+            <option value="">Select Interest</option>
+            <option value="Tree Planting Initiative">Tree Planting Initiative</option>
+            <option value="Community Education Program">Community Education Program</option>
+            <option value="Digital Marketing Support">Digital Marketing Support</option>
+          </select>
         </div>
         <div className="col-span-full">
-          <label className="block text-gray-700 mb-2">Cover Letter</label>
+          <label className="block text-gray-700 mb-2">Why do you want to volunteer?</label>
           <textarea
             name="message"
             required
@@ -117,8 +126,8 @@ const CareerForm = ({ onSuccess }) => {
     </form>
   );
 };
-CareerForm.propTypes = {
+VolunteerForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
 };
 
-export default CareerForm;
+export default VolunteerForm;

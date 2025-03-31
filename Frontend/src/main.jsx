@@ -14,6 +14,7 @@ import InitiativesDetails from "./components/InitiativesDetails.jsx";
 import Donate from "./Pages/Donates.jsx";
 import Event from "./Pages/Events.jsx";
 import Blog from "./Pages/Blogs.jsx";
+import EventDetails from "./components/Event/EventDetails.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -30,6 +31,7 @@ root.render(
           <Route path="news" element={<Newsroom />} />
           <Route path="blog" element={<Blog />} />
           <Route path="events" element={<Event />} />
+          <Route path="events/:id" element={<EventDetails />} />
           <Route path="donate" element={<Donate />} />
           <Route path="joinus" element={<JoinUs />} />
           <Route path="*" element={<h1>Page not found</h1>} />
