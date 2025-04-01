@@ -3,7 +3,7 @@ export const currentEvents = [
     id: 1,
     title: "Beirut Green Week",
     description:
-      "Week-long sustainability festival featuring workshops, markets, and expert panels on urban ecology.",
+      "Beirut Green Week is an immersive, week-long celebration dedicated to sustainability and environmental innovation. This festival brings together a vibrant community of eco-enthusiasts to participate in interactive workshops, explore bustling markets featuring green products, and engage with expert panels discussing urban ecology challenges and solutions. Attendees will experience creative exhibitions and dynamic events that inspire environmental stewardship throughout Downtown Beirut.",
     start: "2024-04-15",
     end: "2024-04-22",
     location: "Downtown Beirut",
@@ -44,7 +44,7 @@ export const currentEvents = [
     id: 2,
     title: "Tech for Good Summit",
     description:
-      "A gathering of innovators using technology to drive positive social change.",
+      "Tech for Good Summit is an inspiring assembly where forward-thinking innovators and technology leaders converge to explore and implement digital solutions that drive transformative social change. The summit offers insightful keynote presentations, interactive panels, and collaborative workshops, encouraging creative problem-solving and fostering partnerships that leverage technology to address pressing social issues, empower communities remarkably, and promote a more equitable future.",
     start: "2024-04-16",
     end: "2024-04-23",
     location: "Beirut Digital District",
@@ -76,7 +76,7 @@ export const currentEvents = [
     id: 3,
     title: "Eco-Friendly Startup Expo",
     description:
-      "Showcasing startups that focus on sustainability and green innovation.",
+      "Eco-Friendly Startup Expo is an engaging exhibition dedicated to showcasing pioneering startups that are revolutionizing sustainability and green innovation. This event provides a platform for emerging entrepreneurs to present cutting-edge eco-friendly products and solutions. Attendees will have the opportunity to network with industry experts, discover innovative technologies, and explore creative strategies designed to foster a greener future while supporting responsible business practices.",
     start: "2024-04-18",
     end: "2024-04-25",
     location: "City Center Mall",
@@ -108,7 +108,7 @@ export const currentEvents = [
     id: 4,
     title: "Digital Art Festival",
     description:
-      "An interactive exhibition featuring digital artists from around the world.",
+      "Digital Art Festival is a vibrant celebration of creativity and technology, offering an interactive exhibition that brings together digital artists from across the globe. The festival features immersive installations, dynamic live demonstrations, and collaborative projects that push the boundaries of digital expression. Visitors will explore a diverse array of art forms, engage with innovative creators, and experience cutting-edge digital media in a stimulating, culturally rich environment.",
     start: "2024-04-17",
     end: "2024-04-24",
     location: "Art Hub Beirut",
@@ -140,7 +140,7 @@ export const currentEvents = [
     id: 5,
     title: "Beirut Food Festival",
     description:
-      "A celebration of Lebanese and international cuisines with live cooking shows.",
+      "Beirut Food Festival is a lively gastronomic event celebrating the rich diversity of Lebanese and international cuisines. Attendees can indulge in a wide array of culinary delights, enjoy live cooking shows, and experience interactive food demonstrations from renowned chefs. The festival creates a vibrant atmosphere where food lovers gather to explore new flavors, share cultural traditions, and appreciate the art of cooking in an engaging and festive environment.",
     start: "2024-04-19",
     end: "2024-04-24",
     location: "Downtown Beirut",
@@ -176,7 +176,7 @@ export const upcomingEvents = [
     id: 6,
     title: "Mediterranean Cleanup Initiative",
     description:
-      "Coastal cleanup day across 5 beaches with waste sorting and recycling workshops.",
+      "Mediterranean Cleanup Initiative is an impactful coastal environmental action day dedicated to revitalizing the shoreline across five local beaches. Participants will engage in extensive waste sorting activities, take part in recycling workshops, and work collectively to remove pollutants from the marine environment. This initiative not only promotes community responsibility and environmental awareness but also fosters a spirit of cooperation to preserve the natural beauty of Jounieh Bay for future generations.",
     start: "2025-05-05",
     end: "2026-05-05",
     location: "Jounieh Bay",
@@ -219,7 +219,7 @@ export const upcomingEvents = [
     id: 7,
     title: "AI & Ethics Conference",
     description:
-      "Exploring the ethical implications of artificial intelligence in society.",
+      "AI & Ethics Conference is a thought-provoking event that delves into the complex ethical dimensions of artificial intelligence and its profound impact on society. Industry experts, ethicists, and technologists will engage in dynamic discussions and interactive panels to examine issues such as bias, privacy, and accountability. The conference aims to foster a balanced dialogue, promote responsible AI development, and inspire innovative solutions for emerging ethical challenges in technology.",
     start: "2024-05-10",
     end: "2024-05-12",
     location: "Lebanese University",
@@ -251,7 +251,7 @@ export const upcomingEvents = [
     id: 8,
     title: "Sustainable Fashion Workshop",
     description:
-      "Learn how to create eco-friendly fashion pieces from recycled materials.",
+      "Sustainable Fashion Workshop is an interactive learning experience designed for creative individuals passionate about eco-friendly design. During this hands-on workshop, participants will learn innovative techniques to transform recycled materials into stylish, sustainable fashion pieces. Experts in sustainable design will guide attendees through material selection, pattern design, and upcycling methods, inspiring a commitment to environmental responsibility and creative expression within modern fashion.",
     start: "2024-05-15",
     end: "2024-05-15",
     location: "Beirut Fashion Hub",
@@ -283,7 +283,7 @@ export const upcomingEvents = [
     id: 9,
     title: "Green Energy Expo",
     description:
-      "Exhibition showcasing the latest in renewable energy technologies.",
+      "Green Energy Expo is a comprehensive exhibition dedicated to presenting the most recent advancements in renewable energy technologies. This event gathers industry pioneers, innovative startups, and expert researchers to demonstrate cutting-edge solutions that harness sustainable power sources. Visitors will explore interactive displays, gain insights through expert talks, and discover emerging trends that are shaping the future of clean energy and contributing to a greener, more sustainable global landscape.",
     start: "2024-05-20",
     end: "2024-05-22",
     location: "Expo Center Beirut",
@@ -315,7 +315,7 @@ export const upcomingEvents = [
     id: 10,
     title: "Urban Farming Conference",
     description:
-      "A conference dedicated to the growth of urban agriculture and sustainable food systems.",
+      "Urban Farming Conference is a forward-thinking gathering that focuses on advancing urban agriculture and sustainable food systems in metropolitan areas. The conference brings together experts, urban farmers, and policymakers to explore innovative practices, share research insights, and discuss emerging trends in sustainable food production. Participants will benefit from interactive sessions, practical workshops, and collaborative networking opportunities aimed at transforming urban landscapes through agricultural innovation.",
     start: "2024-05-25",
     end: "2024-05-26",
     location: "City University",
@@ -347,7 +347,7 @@ export const upcomingEvents = [
     id: 11,
     title: "Recycling Innovation Summit",
     description:
-      "Summit focusing on innovative recycling methods and sustainable waste management.",
+      "Recycling Innovation Summit is a dynamic event that brings together industry leaders, environmental experts, and creative thinkers to explore groundbreaking recycling methods and sustainable waste management practices. The summit will feature interactive sessions, in-depth panel discussions, and hands-on workshops designed to inspire new ideas and practical solutions for reducing waste. Attendees will leave with innovative strategies to transform recycling processes and enhance community sustainability efforts.",
     start: "2024-05-28",
     end: "2024-05-28",
     location: "Innovation Hub",
@@ -383,7 +383,7 @@ export const pastEvents = [
     id: 12,
     title: "Solar Power Symposium",
     description:
-      "Annual conference on renewable energy adoption in urban environments.",
+      "Solar Power Symposium is an annual conference that brings together experts, researchers, and industry leaders to explore the latest trends in renewable energy adoption within urban environments. The symposium focuses on solar energy innovations, sustainable infrastructure solutions, and practical strategies for integrating clean power into cityscapes. Through keynote speeches, technical sessions, and networking opportunities, participants are encouraged to drive forward the transition towards a greener, more energy-efficient future.",
     start: "2023-11-20",
     end: "2023-11-22",
     location: "Lebanese American University",
@@ -402,7 +402,7 @@ export const pastEvents = [
     id: 13,
     title: "Historic Preservation Forum",
     description:
-      "A forum discussing the challenges and successes in preserving historical sites.",
+      "Historic Preservation Forum is a comprehensive discussion platform dedicated to exploring both the challenges and triumphs associated with preserving historical sites. This engaging forum brings together experts, heritage professionals, and community advocates to share insights, best practices, and innovative approaches for conserving cultural landmarks. Through interactive panels and in-depth discussions, participants examine the importance of maintaining historical integrity while adapting to modern urban development pressures.",
     start: "2023-10-10",
     end: "2023-10-12",
     location: "Downtown Beirut",
@@ -421,7 +421,7 @@ export const pastEvents = [
     id: 14,
     title: "Cultural Heritage Workshop",
     description:
-      "Workshop focused on preserving local cultural heritage through art and history.",
+      "Cultural Heritage Workshop is a hands-on event designed to explore and preserve local cultural traditions through the dynamic lens of art and history. Participants will engage in creative activities, learn about traditional techniques, and explore the rich tapestry of cultural narratives that define the community. This workshop aims to inspire a deeper appreciation for cultural heritage while fostering skills that connect historical practices with contemporary artistic expressions.",
     start: "2023-09-15",
     end: "2023-09-15",
     location: "Cultural Center",
@@ -440,7 +440,7 @@ export const pastEvents = [
     id: 15,
     title: "Renewable Energy Workshop",
     description:
-      "Hands-on workshop on installing and maintaining renewable energy systems.",
+      "Renewable Energy Workshop is an interactive, practical session focused on the installation and maintenance of modern renewable energy systems. Participants will receive step-by-step training on solar panel setup, wind turbine operation, and other sustainable energy technologies. The workshop emphasizes hands-on learning, safety protocols, and troubleshooting techniques to ensure effective system performance. Attendees will gain valuable skills and insights to confidently adopt renewable energy solutions in both residential and commercial settings.",
     start: "2023-08-05",
     end: "2023-08-05",
     location: "Tech Hub",
@@ -459,7 +459,7 @@ export const pastEvents = [
     id: 16,
     title: "Local Arts Fair",
     description:
-      "Celebration of local art and craftsmanship featuring numerous exhibitions.",
+      "Local Arts Fair is a vibrant celebration dedicated to showcasing the rich diversity of local art and craftsmanship. This event brings together artists, artisans, and creative communities to present a wide range of exhibitions, interactive installations, and live demonstrations. Visitors are invited to immerse themselves in the cultural spirit of the region, experience unique artistic expressions, and appreciate the intricate skill and creativity that define local craftsmanship traditions.",
     start: "2023-07-20",
     end: "2023-07-21",
     location: "Art District",

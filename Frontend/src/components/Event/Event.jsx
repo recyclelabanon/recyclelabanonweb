@@ -31,21 +31,29 @@ const Events = () => {
   };
 
   return (
-    <div className="pt-16">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="pt-16 bg-gray-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* View Toggle */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <h2 className="text-3xl font-bold text-gray-900">Events Calendar</h2>
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <button 
               onClick={() => setViewMode('list')} 
-              className={`px-4 py-2 rounded-2xl ${viewMode === 'list' ? 'bg-green-400 text-white hover:bg-green-700' : 'bg-gray-200 hover:bg-gray-300'}`}
+              className={`px-4 py-2 rounded-lg transition-all ${
+                viewMode === 'list' 
+                  ? 'bg-green-600 text-white shadow-md hover:bg-green-700' 
+                  : 'bg-white text-gray-600 shadow-sm hover:bg-gray-50'
+              }`}
             >
               List View
             </button>
             <button 
               onClick={() => setViewMode('calendar')} 
-              className={`px-4 py-2 rounded-2xl ${viewMode === 'calendar' ? 'bg-green-400 text-white hover:bg-green-700' : 'bg-gray-200 hover:bg-gray-300'}`}
+              className={`px-4 py-2 rounded-lg transition-all ${
+                viewMode === 'calendar' 
+                  ? 'bg-green-600 text-white shadow-md hover:bg-green-700' 
+                  : 'bg-white text-gray-600 shadow-sm hover:bg-gray-50'
+              }`}
             >
               Calendar
             </button>
@@ -54,17 +62,19 @@ const Events = () => {
 
         {/* Content */}
         {viewMode === 'calendar' ? (
-          <EventCalendar 
-            events={allEvents.map(e => ({
-              title: e.title,
-              start: new Date(e.start),
-              end: new Date(e.end),
-              resource: e
-            }))} 
-            onSelectEvent={handleSelectEvent}
-          />
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+            <EventCalendar 
+              events={allEvents.map(e => ({
+                title: e.title,
+                start: new Date(e.start),
+                end: new Date(e.end),
+                resource: e
+              }))} 
+              onSelectEvent={handleSelectEvent}
+            />
+          </div>
         ) : (
-          <>
+          <div className="space-y-12">
             <EventSection 
               title="Current Events" 
               events={currentEvents} 
@@ -79,10 +89,9 @@ const Events = () => {
               title="Past Events" 
               events={pastEvents} 
             />
-          </>
+          </div>
         )}
 
-        {/* Registration Modal */}
         <Modal isOpen={showRegistration} onClose={() => setShowRegistration(false)}>
           {selectedEvent && <EventRegistrationForm event={selectedEvent} />}
         </Modal>
@@ -92,11 +101,10 @@ const Events = () => {
 };
 
 const EventSection = ({ title, events, onRegister }) => {
-  console.log(`Rendering ${title} with events:`, events);
   return (
-    <div className="mb-12">
-      <h3 className="text-xl font-semibold text-gray-800 mb-6">{title}</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="bg-white rounded-xl shadow-lg p-6">
+      <h3 className="text-2xl font-semibold text-gray-800 mb-6">{title}</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.length > 0 ? (
           events.map(event => (
             <EventCard 
@@ -106,7 +114,9 @@ const EventSection = ({ title, events, onRegister }) => {
             />
           ))
         ) : (
-          <p className="text-gray-600">No events available</p>
+          <div className="col-span-full text-center py-12">
+            <p className="text-gray-500 italic">No events in this category</p>
+          </div>
         )}
       </div>
     </div>

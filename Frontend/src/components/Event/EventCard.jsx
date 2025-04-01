@@ -10,25 +10,27 @@ const EventCard = ({ event, onRegister }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
       <img src={event.image} alt={event.title} className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <span className={`${statusColors[event.status]} px-3 py-1 rounded-full text-sm`}>
+      <div className="p-6 flex-1 flex flex-col">
+        <span className={`${statusColors[event.status]} px-3 py-1 rounded-full text-sm inline-block`}>
           {event.status.toUpperCase()}
         </span>
-        <h3 className="text-xl font-semibold mt-2">{event.title}</h3>
-        <p className="text-gray-600 mt-2">{event.description}</p>
+        <h3 className="text-xl font-semibold mt-2 mb-1">{event.title}</h3>
+        <p className="text-gray-600 mt-2 line-clamp-3 flex-1">
+          {event.description}
+        </p>
         <div className="mt-4 flex justify-between items-center">
           <Link 
             to={`/events/${event.id}`} 
-            className="text-green-600 hover:text-green-700 font-medium"
+            className="text-green-600 hover:text-green-700 font-medium transition-colors"
           >
             View Details →
           </Link>
           {event.status === 'upcoming' && (
             <button 
               onClick={() => onRegister(event)}
-              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+              className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
             >
               Register Now
             </button>
