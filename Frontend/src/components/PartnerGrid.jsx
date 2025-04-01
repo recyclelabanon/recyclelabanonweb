@@ -10,8 +10,8 @@ const PartnerGrid = ({ title, partners }) => {
                         key={index}
                         className="bg-white rounded-lg shadow-sm p-6 flex items-center justify-center hover:shadow-md transition-shadow"
                     >
-                        {partner.logo ? (
-                            <img src={partner.logo} alt={partner.name} className="max-h-12" />
+                        {partner.img ? (
+                            <img src={partner.img} alt={partner.name} className="max-h-24" />
                         ) : (
                             <span className="text-center font-medium text-gray-700">{partner.name}</span>
                         )}

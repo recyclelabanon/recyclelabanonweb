@@ -1,6 +1,10 @@
 // components/InitiativesDetails.jsx
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import RegenerativeHubTeam from "../assets/RegenerativeHub/RegenerativeHubTeam.jpg";
+import EcoSouk from '../assets/EcoSouk/EcoSouk.jpg';
+import TerraPods from '../assets/Terrapods/Agroecology/TerraPods.jpg';
+import DiveIntoAction from '../assets/DiveIntoAction/DiveIntoAction.png';
 
 const programData = {
   regeneratehub: {
@@ -12,7 +16,7 @@ const programData = {
       <p>Regenerate Hub engages users to consider the flow, impact, and value of resources across sectors [e.g. human, waste, energy, water, earth], how systems can be improved, and who is working to create alternatives on the ground.</p>
       <p>Regenerate Hub is structured to visualise how you can create just and equitable change in harmony with nature, supporting the vitality and resiliency of interconnected ecosystems.</p>
     `,
-    image: 'https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1951&q=80',
+    image: RegenerativeHubTeam,
     accomplishments: [
       { label: 'Version', value: '4.0 of Regenerate Hub platform development' },
       { label: 'Published Journals', value: '1 published journal' },
@@ -74,7 +78,7 @@ const programData = {
       <p>We are committed to promoting accessibility and awareness while reducing the harmful impacts of consumables. EcoSouk helps create equitable access to resources, reducing dependence on unsustainable practices, access to market and income generation for over 150 local producers.</p>
       <p>EcoSouk marketplace connects makers and consumers, shifts consumption habits and creates income generation streams for our members. By supporting small-scale producers who may not have access to larger markets, we strengthen local economies. Our platform is designed to enable us to make eco-conscious choices with ease. Whether you browse our curated selection online or visit our physical store in Beirut or Baskinta, you'll find a range of thoughtfully sourced products that align with your values.</p>
     `,
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+    image: EcoSouk,
     accomplishments: [
       { label: 'Shops', value: '2 EcoSouk brick-n-click shops' },
       { label: 'Workshops', value: '50 workshops' },
@@ -113,7 +117,7 @@ const programData = {
       <p>The residency program provides creators with a supportive platform to tackle our planetary crises. Engaging with the surroundings, artists contribute to ecological solutions challenging traditional industry and agriculture models, aligning with TerraPods' holistic mission.</p>
       <p>With four residency units, TerraPods focuses on fostering creativity, collaboration, and cross-sectoral engagement. Through the "Grow, Create, Market" initiative, the project promotes self-sufficiency by utilising farm-grown materials for bio-compostable products. The farm serves as a hub for bio-design exploration, developing alternatives to single-use plastics. TerraPods connects creators with consumers through the EcoSouk marketplace, supporting local economies and promoting sustainable consumption. The "grow-create-market" model is central to the project's mission, aiming to increase the availability of locally produced bio-material alternatives and foster a harmonious relationship between the environment and the community.</p>
     `,
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80',
+    image: TerraPods,
     accomplishments: [
       { label: 'Land Restoration', value: 'Ancestral land restoration' },
       { label: 'Workers Hired', value: '20 Cash for Work seasonal labourers' },
@@ -163,7 +167,7 @@ const programData = {
       <p>BalaPlastic concert for Mashrou3Leila, last concert in Lebanon: The plastic invading Mashroue Leila concert is part of the #BalaPlastic movement to raise awareness on the tragic impacts of single use plastic on Lebanon public health, environment and economy. The plastic used at Mashroue Leila concert at the Ehdeniyat festival, was collected from a beach cleanup organised by Greenpeace Mediterranean and Recycle Lebanon, and donated by different NGOs. A group of architects from the American University of Beirut- (DI-LAB) worked on the design of the art installation.</p>
       <p>Art Exhibits: Between 2016 and 2018 we hosted 3 art exhibits during Beirut Design Week with 45 curated artists and trainers exhibited at our 1920's restored heritage residency in Gemayze, including highlighted artists Tom Young, Charbel Samuel Aoun, Noor Haydar, Thierry Magniez, and the Haven for Artist collective calling for a collective Dive Into Action to address the climate crisis in the ecological collapse as a means for hope through action.</p>
     `,
-    image: 'https://images.unsplash.com/photo-1618477462146-050d2767eac4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+    image: DiveIntoAction,
     accomplishments: [
       { label: 'Waste Sorted', value: '800 tons waste sorted & recycled' },
       { label: 'Clean Ups', value: '200 zero waste clean ups' },

@@ -1,6 +1,7 @@
 import { img10, img12, img34, img41 } from '../assets/Image';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
+import { Link } from 'react-router-dom';
 
 const AboutUs = () => {
   // Original content sections
@@ -101,6 +102,7 @@ const AboutUs = () => {
     }
   ];
 
+
   // Destructure our content sections for clarity
   const mission = contentSections.find(section => section.title === "Our Mission");
   const vision = contentSections.find(section => section.title === "Our Vision");
@@ -170,7 +172,8 @@ const AboutUs = () => {
           
           <div className="grid md:grid-cols-2 gap-6 mt-8">
             {impactPrograms.map((program, index) => (
-              <div 
+              <Link
+                to={`/initiatives/${program.title.replace(/\s+/g, '').toLowerCase()}`} 
                 key={index} 
                 className={`${program.bgColor} ${program.hoverColor} rounded-lg p-6 transition-all duration-300 hover:shadow-md flex flex-col cursor-pointer`}
               >
@@ -187,7 +190,7 @@ const AboutUs = () => {
                   <h3 className="text-xl font-semibold text-green-800">{program.title}</h3>
                 </div>
                 <p className="text-gray-700 mt-2">{program.description}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

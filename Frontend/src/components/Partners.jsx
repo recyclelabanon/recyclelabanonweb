@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Hero from './Hero';
 import Section from './Section';
 import PartnerGrid from './PartnerGrid';
+import { img1, img13, img15, img17, img18, img19, img2, img22, img23, img24, img26, img27, img3, img38, img39, img4, img42, img43, img45, img46, img5, img50, img6, img7, img8 } from "../assets/Image";
 
 const Partners = () => {
   const navigate = useNavigate();
@@ -10,42 +11,40 @@ const Partners = () => {
     window.scrollTo(0, 0); // Scroll to top
   };
   const coalitions = [
-    { name: 'Break Free From Plastic', category: 'coalition' },
-    { name: 'Chimica Verde Bionet', category: 'coalition' },
-    { name: 'IPEN', category: 'coalition' },
-    { name: 'GAIA', category: 'coalition' },
-    { name: 'DAWERRA', category: 'coalition' },
+    { name: 'Break Free From Plastic', category: 'coalition', img: img50},
+    { name: 'Chimica Verde Bionet', category: 'coalition', img: img5},
+    { name: 'IPEN', category: 'coalition', img: img22},
+    { name: 'GAIA', category: 'coalition', img: img42},
   ];
 
   const donors = [
-    { name: 'COBIAC', category: 'donor' },
-    { name: 'Mercy Corp', category: 'donor' },
-    { name: 'March', category: 'donor' },
-    { name: 'Talaya', category: 'donor' },
-    { name: 'The Embassy of Finland', category: 'donor' },
-    { name: 'EcoWise', category: 'donor' },
-    { name: 'CLIMAS', category: 'donor' },
-    { name: 'The Embassy of Japan', category: 'donor' },
-    { name: 'The Asfari Foundation', category: 'donor' },
+    { name: 'COBIAC', category: 'donor', img:img7},
+    { name: 'Mercy Corp', category: 'donor', img:img26},
+    { name: 'March', category: 'donor', img:img23},
+    { name: 'Talaya', category: 'donor', img:img39},
+    { name: 'EcoWise', category: 'donor', img:img13},
+    { name: 'CLIMAS', category: 'donor', img:img6},
+    { name: 'The Embassy of Japan', category: 'donor', img:img19},
+    { name: 'The Asfari Foundation', category: 'donor', img:img43},
   ];
 
   const governmentPartners = [
-    { name: 'Ministry of Environment', category: 'government' },
-    { name: 'Ministry of Industry', category: 'government' },
+    { name: 'Ministry of Environment', category: 'government', img: img27},
+    { name: 'Ministry of Industry', category: 'government', img: img38},
   ];
 
   const projectPartners = [
-    { name: 'Imperium Code', category: 'project' },
-    { name: 'Acted Lebanon', category: 'project' },
-    { name: 'UNDP', category: 'project' },
-    { name: 'University of Arizona Environment', category: 'project' },
-    { name: 'RELIEF', category: 'project' },
-    { name: 'AUB ESDU', category: 'project' },
-    { name: 'AUB Neighbourhood Initiative', category: 'project' },
-    { name: "Mashrou'Leila", category: 'project' },
-    { name: 'GreenPeace', category: 'project' },
-    { name: 'Colonel Brewery', category: 'project' },
-    { name: 'Falamanke', category: 'project' },
+    { name: 'Imperium Code', category: 'project', img: img18},
+    { name: 'Acted Lebanon', category: 'project', img: img2},
+    { name: 'UNDP', category: 'project', img: img46},
+    { name: 'University of Arizona Environment', category: 'project', img: img3},
+    { name: 'RELIEF', category: 'project', img: img45},
+    { name: 'AUB ESDU', category: 'project', img: img4},
+    // { name: 'AUB Neighbourhood Initiative', category: 'project', img: img1},
+    { name: "Mashrou'Leila", category: 'project', img: img24},
+    { name: 'GreenPeace', category: 'project', img: img17},
+    { name: 'Colonel Brewery', category: 'project', img: img8},
+    { name: 'Falamanke', category: 'project', img: img15},
   ];
 
   return (
