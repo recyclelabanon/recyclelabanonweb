@@ -14,6 +14,7 @@ const blogRoutes = require('./routes/blogRoutes');
 const newsRoutes = require('./routes/newsRoutes');
 const teamsRoutes = require('./routes/teamsRoutes'); 
 const contactRoutes = require('./routes/Forms/contactRoutes');
+const careerRoutes = require('./routes/Forms/careerRoutes'); // Import the new form routes
 const volunteerRoutes = require('./routes/Forms/volunteerRoutes');
 const donationRoutes = require('./routes/Forms/donationRoutes');
 const subscribeRoutes = require('./routes/Forms/subscribeRoutes');
@@ -59,6 +60,7 @@ app.use('/api/v1/blogs', blogRoutes);
 app.use('/api/v1/news', newsRoutes);
 app.use('/api/v1/teams', teamsRoutes);
 app.use('/api/v1/contact', contactRoutes); // Mount the new form routes
+app.use('/api/v1/career', careerRoutes); // Mount the new form routes
 app.use('/api/v1/volunteer', volunteerRoutes); // Mount the new form routes
 app.use('/api/v1/donation', donationRoutes); // Mount the new form routes
 app.use('/api/v1/subscribe', subscribeRoutes); // Mount the new form routes

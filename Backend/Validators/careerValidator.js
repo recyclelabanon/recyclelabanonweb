@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 
-exports.validateCareerApplication = [
+exports.validateCareerForm = [
   // Validate fullName
   body('fullName')
     .trim()
