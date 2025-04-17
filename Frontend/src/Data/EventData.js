@@ -1,4 +1,7 @@
-export const currentEvents = [
+// ------------------------------
+// Provided Data Arrays (with formSchema removed)
+// ------------------------------
+const currentEvents = [
   {
     id: 1,
     title: "Beirut Green Week",
@@ -22,22 +25,6 @@ export const currentEvents = [
     ],
     capacity: 500,
     registered: 427,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true,
-        placeholder: "Enter your full name"
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true,
-        placeholder: "Enter your email"
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -56,20 +43,6 @@ export const currentEvents = [
     timeline: [],
     capacity: 350,
     registered: 312,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -88,20 +61,6 @@ export const currentEvents = [
     timeline: [],
     capacity: 200,
     registered: 175,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -120,20 +79,6 @@ export const currentEvents = [
     timeline: [],
     capacity: 600,
     registered: 540,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -152,26 +97,11 @@ export const currentEvents = [
     timeline: [],
     capacity: 800,
     registered: 710,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   }
 ];
 
-// Upcoming Events (at least 5)
-export const upcomingEvents = [
+const upcomingEvents = [
   {
     id: 6,
     title: "Mediterranean Cleanup Initiative",
@@ -188,31 +118,6 @@ export const upcomingEvents = [
     timeline: [],
     capacity: 200,
     registered: 143,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      },
-      {
-        name: "volunteerType",
-        label: "Volunteer Type",
-        type: "select",
-        required: false,
-        options: [
-          { value: "beach", label: "Beach Cleanup" },
-          { value: "sorting", label: "Waste Sorting" },
-          { value: "education", label: "Education Team" }
-        ]
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -231,20 +136,6 @@ export const upcomingEvents = [
     timeline: [],
     capacity: 250,
     registered: 89,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -263,20 +154,6 @@ export const upcomingEvents = [
     timeline: [],
     capacity: 150,
     registered: 80,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -295,20 +172,6 @@ export const upcomingEvents = [
     timeline: [],
     capacity: 300,
     registered: 200,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -327,20 +190,6 @@ export const upcomingEvents = [
     timeline: [],
     capacity: 400,
     registered: 250,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   },
   {
@@ -359,26 +208,11 @@ export const upcomingEvents = [
     timeline: [],
     capacity: 350,
     registered: 180,
-    formSchema: [
-      {
-        name: "fullName",
-        label: "Full Name",
-        type: "text",
-        required: true
-      },
-      {
-        name: "email",
-        label: "Email",
-        type: "email",
-        required: true
-      }
-    ],
     registrationStatus: "Open"
   }
 ];
 
-// Past Events (at least 5)
-export const pastEvents = [
+const pastEvents = [
   {
     id: 12,
     title: "Solar Power Symposium",
@@ -395,7 +229,6 @@ export const pastEvents = [
     timeline: [],
     capacity: 300,
     registered: 278,
-    formSchema: [],
     registrationStatus: "Closed"
   },
   {
@@ -414,7 +247,6 @@ export const pastEvents = [
     timeline: [],
     capacity: 250,
     registered: 220,
-    formSchema: [],
     registrationStatus: "Closed"
   },
   {
@@ -433,7 +265,6 @@ export const pastEvents = [
     timeline: [],
     capacity: 150,
     registered: 130,
-    formSchema: [],
     registrationStatus: "Closed"
   },
   {
@@ -452,7 +283,6 @@ export const pastEvents = [
     timeline: [],
     capacity: 200,
     registered: 190,
-    formSchema: [],
     registrationStatus: "Closed"
   },
   {
@@ -471,26 +301,124 @@ export const pastEvents = [
     timeline: [],
     capacity: 300,
     registered: 260,
-    formSchema: [],
     registrationStatus: "Closed"
   }
 ];
 
-// Combine all events into one array for convenience
-export const allEvents = [
-  ...currentEvents,
-  ...upcomingEvents,
-  ...pastEvents
-];
+// ------------------------------
+// Normalize Data to a Common Structure
+// ------------------------------
 
-// Helper function to filter events based on the current date
-export const getFilteredEvents = () => {
-  const now = new Date();
+// Format a date object to a readable string.
+const formatDate = (date) => {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+// Map a provided event to our simple event structure.
+// We use the event's start date for the "date" field and assign a default "time" value.
+const mapEvent = (event, defaultCategory = "General") => {
   return {
-    current: currentEvents.filter(
-      (e) => new Date(e.start) <= now && new Date(e.end) >= now
-    ),
-    upcoming: upcomingEvents.filter((e) => new Date(e.start) > now),
-    past: pastEvents.filter((e) => new Date(e.end) < now)
+    id: event.id,
+    title: event.title,
+    date: formatDate(new Date(event.start)),
+    time: "All Day", // Default value (adjust as needed)
+    location: event.location,
+    image: event.image,
+    category: defaultCategory,
+    // Convert "current" to "ongoing" to match the sample structure.
+    status: event.status === "current" ? "ongoing" : event.status,
   };
 };
+
+// Combine all events into one array using the mapEvent helper.
+export const events = [
+  ...currentEvents.map((e) => mapEvent(e)),
+  ...upcomingEvents.map((e) => mapEvent(e)),
+  ...pastEvents.map((e) => mapEvent(e)),
+];
+
+// ------------------------------
+// Enrich Event Details
+// ------------------------------
+
+// getEventById returns the basic event details from the events array and adds extra info.
+export const getEventById = (id) => {
+  const event = events.find((event) => event.id === id);
+  if (!event) return undefined;
+
+  return {
+    ...event,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc vel tincidunt lacinia, nisl nisl aliquam nisl, vel aliquam nisl nisl sit amet nisl.",
+    organizer: "EventHorizon Team",
+    speakers: ["John Doe", "Jane Smith", "Robert Johnson"],
+    attendees: Math.floor(Math.random() * 500) + 100,
+    website: "https://example.com/events/" + id,
+    timeline: [
+      {
+        id: 1,
+        time: "08:00 AM",
+        title: "Registration & Breakfast",
+        description:
+          "Check in and enjoy a complimentary breakfast with other attendees",
+        completed: event.status === "past" || event.status === "ongoing",
+      },
+      {
+        id: 2,
+        time: "09:00 AM",
+        title: "Opening Keynote",
+        description: "Welcome speech and introduction to the event theme",
+        completed: event.status === "past" || event.status === "ongoing",
+      },
+      {
+        id: 3,
+        time: "10:30 AM",
+        title: "Workshop Session 1",
+        description:
+          "Interactive workshops in different tracks based on your interests",
+        completed: event.status === "past",
+      },
+      {
+        id: 4,
+        time: "12:00 PM",
+        title: "Networking Lunch",
+        description:
+          "Enjoy lunch while networking with speakers and other attendees",
+        completed: event.status === "past",
+      },
+      {
+        id: 5,
+        time: "02:00 PM",
+        title: "Panel Discussion",
+        description:
+          "Industry leaders discuss the future trends and challenges",
+        completed: event.status === "past",
+      },
+      {
+        id: 6,
+        time: "04:00 PM",
+        title: "Closing Remarks & Networking",
+        description: "Wrap-up session followed by drinks and networking",
+        completed: event.status === "past",
+      },
+    ],
+  };
+};
+
+// ------------------------------
+// Filter Functions
+// ------------------------------
+
+// Filter events by status.
+export const getUpcomingEvents = () =>
+  events.filter((event) => event.status === "upcoming");
+
+export const getOngoingEvents = () =>
+  events.filter((event) => event.status === "ongoing");
+
+export const getPastEvents = () =>
+  events.filter((event) => event.status === "past");

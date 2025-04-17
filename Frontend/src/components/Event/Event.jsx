@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { allEvents } from '../../Data/EventData';
+import { events as allEvents } from '../../Data/EventData'; // normalized data with start and end included
 import EventCalendar from './EventCalendar';
 import EventRegistrationForm from './EventRegistrationForm';
 import EventCard from './EventCard';
@@ -14,12 +14,21 @@ const Events = () => {
   const [showRegistration, setShowRegistration] = useState(false);
   const navigate = useNavigate();
 
-  // Event filtering logic
+  // For testing or if you want to set a fixed date,
+  // you can use a specific date (here: April 18, 2024)
   const now = new Date("2024-04-18");
-  const currentEvents = allEvents.filter(e => new Date(e.start) <= now && new Date(e.end) >= now);
-  const upcomingEvents = allEvents.filter(e => new Date(e.start) > now && e.status !== 'current');
-  const pastEvents = allEvents.filter(e => new Date(e.end) < now);
 
+  // Filter events based on their start and end dates.
+  // Make sure your normalized data includes `start` and `end` (as ISO date strings).
+  const currentEvents = allEvents.filter(e => 
+    new Date(e.start) <= now && new Date(e.end) >= now
+  );
+  const upcomingEvents = allEvents.filter(e => 
+    new Date(e.start) > now && e.status !== 'current'
+  );
+  const pastEvents = allEvents.filter(e => 
+    new Date(e.end) < now
+  );
 
   const handleSelectEvent = (event) => {
     navigate(`/events/${event.resource.id}`);
@@ -69,7 +78,7 @@ const Events = () => {
                 start: new Date(e.start),
                 end: new Date(e.end),
                 resource: e
-              }))} 
+              }))}
               onSelectEvent={handleSelectEvent}
             />
           </div>

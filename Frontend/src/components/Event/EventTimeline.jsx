@@ -1,4 +1,3 @@
-// components/EventTimeline.jsx
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import moment from 'moment';

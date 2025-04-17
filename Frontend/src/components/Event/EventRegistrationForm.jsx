@@ -1,4 +1,3 @@
-// components/EventRegistrationForm.jsx
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import PropTypes from "prop-types";
@@ -17,8 +16,8 @@ const EventRegistrationForm = ({ event, onSuccess, onCancel }) => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     setError(null);
-
     try {
+      // Simulate an API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
       if (Math.random() < 0.1)
         throw new Error("Registration failed. Please try again.");
@@ -86,104 +85,78 @@ const EventRegistrationForm = ({ event, onSuccess, onCancel }) => {
                 />
               </svg>
               <p className="text-sm">
-                {event.registrationStatus} • {event.registered} participants
-                registered
+                {event.registrationStatus} • {event.registered} participants registered
               </p>
             </div>
           </div>
+          {/* 
+            Note: If your normalized data no longer includes formSchema,
+            you might define your registration fields here manually.
+            For demonstration, we're hardcoding two fields.
+          */}
           <div className="space-y-4">
-            {event.formSchema.map((field) => (
-              <div key={field.name} className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {field.label}
-                  {field.required && (
-                    <span className="text-red-500 ml-1">*</span>
-                  )}
-                </label>
-                <div className="relative">
-                  {field.type === "select" ? (
-                    <select
-                      {...register(field.name, { required: field.required })}
-                      className={`w-full px-4 py-3 rounded-lg border ${
-                        errors[field.name]
-                          ? "border-red-500 focus:ring-red-200"
-                          : "border-gray-300 focus:border-green-500"
-                      } focus:ring-2 focus:ring-green-200 transition-all pr-12`}
-                    >
-                      <option value="">Select {field.label}</option>
-                      {field.options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input
-                      type={field.type}
-                      {...register(field.name, { required: field.required })}
-                      placeholder={field.placeholder}
-                      className={`w-full px-4 py-3 rounded-lg border ${
-                        errors[field.name]
-                          ? "border-red-500 focus:ring-red-200"
-                          : "border-gray-300 focus:border-green-500"
-                      } focus:ring-2 focus:ring-green-200 transition-all pr-12`}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Full Name <span className="text-red-500 ml-1">*</span>
+              </label>
+              <input
+                type="text"
+                {...register("fullName", { required: true })}
+                placeholder="Enter your full name"
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.fullName ? "border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-green-500"
+                } focus:ring-2 focus:ring-green-200 transition-all pr-12`}
+              />
+              {errors.fullName && (
+                <p className="mt-2 text-sm text-red-600 flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                     />
-                  )}
-                  {!errors[field.name] && (
-                    <div className="absolute right-3 top-3 text-gray-400">
-                      {field.type === "email" && (
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                          />
-                        </svg>
-                      )}
-                      {field.type === "tel" && (
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                  )}
-                </div>
-                {errors[field.name] && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center gap-2">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                      />
-                    </svg>
-                    {field.label} is required
-                  </p>
-                )}
-              </div>
-            ))}
+                  </svg>
+                  Full Name is required
+                </p>
+              )}
+            </div>
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email <span className="text-red-500 ml-1">*</span>
+              </label>
+              <input
+                type="email"
+                {...register("email", { required: true })}
+                placeholder="Enter your email"
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.email ? "border-red-500 focus:ring-red-200" : "border-gray-300 focus:border-green-500"
+                } focus:ring-2 focus:ring-green-200 transition-all pr-12`}
+              />
+              {errors.email && (
+                <p className="mt-2 text-sm text-red-600 flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  Email is required
+                </p>
+              )}
+            </div>
           </div>
 
           <AnimatePresence>

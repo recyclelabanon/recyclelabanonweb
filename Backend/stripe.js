@@ -1,5 +1,6 @@
-import express from "express";
-import stripe from "./config/stripe.js";  // ✅ Use ES Module default import
+const express = require('express');
+
+const stripe = require("./config/stripe.js");  // ✅ Use ES Module default import
 
 const router = express.Router();
 
@@ -18,4 +19,4 @@ router.post("/create-payment-intent", async (req, res) => {
     }
 });
 
-export default router;  // ✅ Use ES Module export
+module.exports = router;

@@ -1,8 +1,7 @@
-import Stripe from "stripe";
-
+const Stripe = require("stripe");
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export const checkStripeConnection = async () => {
+const checkStripeConnection = async () => {
   try {
     const balance = await stripe.balance.retrieve();
     console.log("Stripe Connected Successfully!", balance);
@@ -11,4 +10,7 @@ export const checkStripeConnection = async () => {
   }
 };
 
-export default stripe;
+module.exports = {
+  stripe,
+  checkStripeConnection,
+};

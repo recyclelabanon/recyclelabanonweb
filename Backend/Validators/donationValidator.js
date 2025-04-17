@@ -1,7 +1,8 @@
-import { body } from 'express-validator';
+const { body } = require('express-validator');
 
 
-export const validateDonation = [
+
+exports.validateDonation = [
     body('donationType')
     .isIn(['one-time', 'monthly'])
     .withMessage('Invalid donation type'),

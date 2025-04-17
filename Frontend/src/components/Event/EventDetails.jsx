@@ -1,8 +1,7 @@
-// components/EventDetails.jsx
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import moment from 'moment';
-import { allEvents } from '../../Data/EventData';
+import { events as allEvents } from '../../Data/EventData';
 import EventTimeline from './EventTimeline';
 import EventRegistrationForm from './EventRegistrationForm';
 import { useState } from 'react';
@@ -16,8 +15,6 @@ const gallerySettings = {
   slidesToScroll: 1,
   arrows: true,
   adaptiveHeight: true,
-  // nextArrow: <NextArrow />,
-  // prevArrow: <PrevArrow />,
   customPaging: i => (
     <div className="w-3 h-3 bg-gray-300 rounded-full transition-all duration-300 hover:bg-green-500" />
   ),
@@ -27,26 +24,6 @@ const gallerySettings = {
     </div>
   )
 };
-
-// const NextArrow = (props) => (
-//   <button
-//     {...props}
-//     className="slick-next absolute right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all"
-//     aria-label="Next"
-//   >
-//     →
-//   </button>
-// );
-
-// const PrevArrow = (props) => (
-//   <button
-//     {...props}
-//     className="slick-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all"
-//     aria-label="Previous"
-//   >
-//     ←
-//   </button>
-// );
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -63,7 +40,9 @@ const EventDetails = () => {
         >
           <div className="text-6xl mb-4">😕</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Event Not Found</h2>
-          <p className="text-gray-600">The event you&poa;re looking for might have been moved or doesn&apos;t exist.</p>
+          <p className="text-gray-600">
+            The event you’re looking for might have been moved or doesn’t exist.
+          </p>
         </motion.div>
       </div>
     );

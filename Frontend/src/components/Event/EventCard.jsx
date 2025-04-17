@@ -1,10 +1,11 @@
-// components/events/EventCard.jsx
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const EventCard = ({ event, onRegister }) => {
+  // Define colors based on normalized status:
+  // (Assuming our normalized status values are "ongoing" (formerly "current"), "upcoming", or "past")
   const statusColors = {
-    current: 'bg-blue-100 text-blue-800',
+    ongoing: 'bg-blue-100 text-blue-800',
     upcoming: 'bg-green-100 text-green-800',
     past: 'bg-gray-100 text-gray-800'
   };
@@ -13,7 +14,7 @@ const EventCard = ({ event, onRegister }) => {
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
       <img src={event.image} alt={event.title} className="w-full h-48 object-cover" />
       <div className="p-6 flex-1 flex flex-col">
-        <span className={`${statusColors[event.status]} px-3 py-1 rounded-full text-sm inline-block`}>
+        <span className={`${statusColors[event.status] || 'bg-gray-100 text-gray-800'} px-3 py-1 rounded-full text-sm inline-block`}>
           {event.status.toUpperCase()}
         </span>
         <h3 className="text-xl font-semibold mt-2 mb-1">{event.title}</h3>

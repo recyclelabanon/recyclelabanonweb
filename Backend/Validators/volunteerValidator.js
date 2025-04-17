@@ -1,6 +1,7 @@
-import { body } from "express-validator";
+const { body } = require('express-validator');
 
-export const validateVolunteerForm = [
+
+exports.validateVolunteerForm = [
   // Validate fullName
   body("fullName")
     .trim()

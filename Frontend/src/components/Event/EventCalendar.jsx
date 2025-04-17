@@ -1,4 +1,3 @@
-// components/events/EventCalendar.jsx
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -8,7 +7,7 @@ moment.locale('en');
 const localizer = momentLocalizer(moment);
 
 const EventCalendar = ({ events, onSelectEvent }) => {
-  // Custom event styling
+  // Custom styling for calendar events
   const eventStyleGetter = () => ({
     style: {
       backgroundColor: '#f0fdf4',
@@ -20,7 +19,7 @@ const EventCalendar = ({ events, onSelectEvent }) => {
     },
   });
 
-  // Custom toolbar component
+  // Custom Toolbar Component
   const CustomToolbar = ({ date, onNavigate, onView, view }) => (
     <div className="mb-4 flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -74,7 +73,7 @@ const EventCalendar = ({ events, onSelectEvent }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 mb-12">
+    <div className="bg-white rounded-xl shadow-lg p-6 mb-12">
       <Calendar
         localizer={localizer}
         events={events}
@@ -96,8 +95,8 @@ const EventCalendar = ({ events, onSelectEvent }) => {
         defaultView="month"
         popup
         showMultiDayTimes
-        min={new Date().setHours(8, 0, 0)}  // 8:00 AM
-        max={new Date().setHours(20, 0, 0)} // 8:00 PM
+        min={new Date().setHours(8, 0, 0)}
+        max={new Date().setHours(20, 0, 0)}
         className="modern-calendar"
       />
     </div>
