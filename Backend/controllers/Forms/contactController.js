@@ -1,4 +1,4 @@
-const Contact = require("../../models/Form"); // Adjust the path as necessary
+const {Contact} = require("../../models/Form"); // Adjust the path as necessary
 const validator = require("validator");
 
 // Submit contact form

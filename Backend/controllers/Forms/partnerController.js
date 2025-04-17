@@ -1,6 +1,6 @@
 const { validationResult }= require("express-validator");
 
-const Partner = require("../../models/Form"); // Adjust the path as necessary
+const {Partner} = require("../../models/Form"); // Adjust the path as necessary
 
 
 exports.partnerForm = async (req, res) => {

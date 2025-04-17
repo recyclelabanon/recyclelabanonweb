@@ -1,4 +1,4 @@
-const Subscribe = require("../../models/Form");
+const {Subscribe} = require("../../models/Form");
 
 
 exports.subscribeForm = async (req, res) => {

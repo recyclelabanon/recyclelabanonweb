@@ -1,32 +1,33 @@
 const express = require('express');
-
 const { createDonation } = require('../../controllers/Forms/donationController.js');
-const { validateDonation } = require('../../Validators/donationValidator.js'); // Import validation middleware
-const stripe = require('../../config/stripe.js'); // Import your Stripe configuration
+const { validateDonation } = require('../../Validators/donationValidator.js');
+const stripe = require('../../config/stripe.js');
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require('../../middleware/auth.js'); // Import auth middleware
 
 const router = express.Router();
 
-
-
-// Route for creating a donation
+// Route for creating a donation (authenticated users only)
 router.post(
   '/',
+  authenticateUser,        // Require authentication
   validateDonation,
   createDonation
 );
 
-// Route for creating a payment intent
-router.post('/create-payment-intent', async (req, res) => {
+// Route for creating a payment intent (authenticated users only)
+router.post('/create-payment-intent', authenticateUser, async (req, res) => {
   try {
     const { amount, currency } = req.body;
 
-    // Validate required fields
     if (!amount || !currency) {
       return res.status(400).json({ message: 'Amount and currency are required' });
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // Convert to cents
+      amount: Math.round(amount * 100),
       currency,
     });
 

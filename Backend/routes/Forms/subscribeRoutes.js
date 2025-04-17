@@ -1,17 +1,20 @@
 const express = require('express');
-
 const router = express.Router();
-const { subscribeForm, getSubscribeEmails, deleteSubscribeEmail } = require("../../controllers/Forms/SubscribeController.js");
+const {
+  subscribeForm,
+  getSubscribeEmails,
+  deleteSubscribeEmail,
+} = require('../../controllers/Forms/SubscribeController.js');
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require('../../middleware/auth.js');
 
-// Route to handle form submissions
-router.post("/", subscribeForm);
+// Public: Subscribe to the newsletter
+router.post('/', subscribeForm);
 
-// Route to fetch all emails
-router.get("/", getSubscribeEmails);
-
-// Route to delete an email by ID
-router.delete("/:id", deleteSubscribeEmail);
-
+// Admin-only: View and delete subscriber emails
+router.get('/', authenticateUser, authorizeRoles('admin'), getSubscribeEmails);
+router.delete('/:id', authenticateUser, authorizeRoles('admin'), deleteSubscribeEmail);
 
 module.exports = router;
-

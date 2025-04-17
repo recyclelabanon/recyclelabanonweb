@@ -1,4 +1,4 @@
-const Donation = require("../../models/Form");
+const {Donation} = require("../../models/Form");
 const nodemailer = require('nodemailer');
 
 exports.createDonation = async (req, res) => {

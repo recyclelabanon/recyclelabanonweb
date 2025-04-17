@@ -1,11 +1,21 @@
 const express = require('express');
-
 const router = express.Router();
-const { volunteerForm, getAllVolunteer, deleteVolunteerForm } = require("../../controllers/Forms/volunteerController.js");
-const { validateVolunteerForm } = require("../../Validators/volunteerValidator.js"); // Import validation middleware
+const {
+  volunteerForm,
+  getAllVolunteer,
+  deleteVolunteerForm,
+} = require('../../controllers/Forms/volunteerController.js');
+const { validateVolunteerForm } = require('../../Validators/volunteerValidator.js');
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require('../../middleware/auth.js');
 
-router.post("/", validateVolunteerForm, volunteerForm); // Add validation middleware
-router.get("/", getAllVolunteer);
-router.delete("/:id", deleteVolunteerForm);
+// Public: Submit volunteer form
+router.post('/', validateVolunteerForm, volunteerForm);
+
+// Admin-only: View and delete volunteer submissions
+router.get('/', authenticateUser, authorizeRoles('admin'), getAllVolunteer);
+router.delete('/:id', authenticateUser, authorizeRoles('admin'), deleteVolunteerForm);
 
 module.exports = router;
