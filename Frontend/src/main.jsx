@@ -23,6 +23,8 @@ import News from "./Admin/Pages/News.jsx";
 import Teams from "./Admin/Pages/Teams.jsx";
 import Programs from "./Admin/Pages/Programs.jsx";
 import Contact from "./Admin/Pages/Contact.jsx";
+import AdminBlogEdit from "./Admin/Pages/AdminBlogEdit.jsx";
+import BlogDetail from "./components/BlogDetails.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -33,9 +35,11 @@ root.render(
           <Route path="admin" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="blogs" element={<Blogs />} />
-            <Route path="events" element={<Events />} />
-            <Route path="news" element={<News />} />
+            <Route path="blogs/new" element={<AdminBlogEdit />} />
+            <Route path="blogs/edit/:id" element={<AdminBlogEdit />} />
             <Route path="teams" element={<Teams />} />
+            <Route path="news" element={<News />} />
+            <Route path="events" element={<Events />} />
             <Route path="programs" element={<Programs />} />
             <Route path="contacts" element={<Contact />} />
             <Route path="*" element={<h1>Page not found</h1>} />
@@ -48,6 +52,7 @@ root.render(
           <Route path="contacts" element={<Contacts />} />
           <Route path="news" element={<Newsroom />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogDetail />} />
           <Route path="events" element={<Event />} />
           <Route path="events/:id" element={<EventDetails />} />
           <Route path="donate" element={<Donate />} />

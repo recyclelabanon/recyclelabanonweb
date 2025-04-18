@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@tailwindcss/vite": "^4.0.6",
+    "axios": "^1.8.4",
     "framer-motion": "^12.6.2",
     "lucide-react": "^0.344.0",
     "moment": "^2.30.1",

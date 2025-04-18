@@ -1,115 +1,113 @@
-import { useState } from 'react';
-import { Plus, Search, Edit2, Trash2 } from 'lucide-react';
-
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FileText, Edit, Trash, Plus } from 'lucide-react';
+import { useBlogContext } from '../Context/BlogContext';
 
 function Blogs() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { blogs, loading, error, deleteBlog, refreshBlogs } = useBlogContext();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
 
-  // Mock data - in real app, this would come from an API
-  const blogs = [
-    {
-      id: '1',
-      title: 'Recycling Best Practices',
-      excerpt: 'Learn about the most effective ways to recycle...',
-      author: 'John Doe',
-      date: '2024-02-20',
-      status: 'published',
-    },
-    {
-      id: '2',
-      title: 'Sustainable Living Tips',
-      excerpt: 'Simple ways to reduce your environmental impact...',
-      author: 'Jane Smith',
-      date: '2024-02-19',
-      status: 'draft',
-    },
-  ];
+  useEffect(() => {
+    // Ensure we have the latest data
+    refreshBlogs();
+  }, [refreshBlogs]);
 
-  const filteredBlogs = blogs.filter(blog =>
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this blog post?')) {
+      try {
+        setIsDeleting(true);
+        await deleteBlog(id);
+        // Blog list should update automatically via context
+      } catch (err) {
+        setDeleteError('Failed to delete blog');
+        console.error(err);
+      } finally {
+        setIsDeleting(false);
+      }
+    }
+  };
 
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Blog Posts</h1>
-        <button className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-green-700">
-          <Plus size={20} />
-          <span>New Post</span>
+  if (loading) {
+    return <div className="p-4">Loading blogs...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 text-red-500">
+        Error loading blogs: {error}
+        <button 
+          onClick={refreshBlogs}
+          className="ml-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Retry
         </button>
       </div>
+    );
+  }
 
-      <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm">
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            placeholder="Search blogs..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
-        </div>
-        <select className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-          <option value="all">All Status</option>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
-        </select>
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Blog Posts</h1>
+        <Link
+          to="/admin/blogs/new"
+          className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+        >
+          <Plus className="mr-2" size={16} />
+          Add New Post
+        </Link>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Author
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredBlogs.map((blog) => (
-              <tr key={blog.id}>
-                <td className="px-6 py-4">
-                  <div className="flex flex-col">
-                    <span className="font-medium">{blog.title}</span>
-                    <span className="text-sm text-gray-500">{blog.excerpt}</span>
+      {deleteError && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {deleteError}
+        </div>
+      )}
+
+      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <ul className="divide-y divide-gray-200">
+          {blogs.length > 0 ? (
+            blogs.map((blog) => (
+              <li key={blog._id}>
+                <div className="px-4 py-4 sm:px-6 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <FileText className="text-gray-500 mr-3" />
+                    <div>
+                      <h3 className="text-lg font-medium">{blog.title}</h3>
+                      <div className="mt-1 text-sm text-gray-500">
+                        <span>{blog.category}</span>
+                        <span className="mx-2">•</span>
+                        <span>{new Date(blog.date).toLocaleDateString()}</span>
+                        <span className="mx-2">•</span>
+                        <span>{blog.author}</span>
+                      </div>
+                    </div>
                   </div>
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-500">{blog.author}</td>
-                <td className="px-6 py-4 text-sm text-gray-500">{blog.date}</td>
-                <td className="px-6 py-4">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    blog.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                  }`}>
-                    {blog.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="flex space-x-3">
-                    <button className="text-blue-600 hover:text-blue-800">
-                      <Edit2 size={18} />
-                    </button>
-                    <button className="text-red-600 hover:text-red-800">
-                      <Trash2 size={18} />
+                  <div className="flex space-x-2">
+                    <Link
+                      to={`/admin/blogs/edit/${blog._id}`}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      <Edit size={18} />
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(blog._id)}
+                      disabled={isDeleting}
+                      className="text-red-600 hover:text-red-800 disabled:opacity-50"
+                    >
+                      <Trash size={18} />
                     </button>
                   </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="px-4 py-5 text-center text-gray-500">
+              No blog posts yet. Click &quot;Add New Post&quot; to create one.
+            </li>
+          )}
+        </ul>
       </div>
     </div>
   );

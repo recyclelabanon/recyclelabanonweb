@@ -28,7 +28,7 @@ function Login() {
       const data = await response.json();
       localStorage.setItem('token', data.token);
       navigate('/');
-    } catch (err) {
+    } catch {
       setError('Invalid email or password');
     }
   };
