@@ -58,7 +58,7 @@ const Blog = () => {
               whileHover={{ scale: 1.02 }}
             >
               <img
-                src={blog.coverImage}
+                src={blog.coverImage || '/default-blog.jpg'}
                 alt={blog.title}
                 className="w-full h-48 object-cover"
               />
@@ -68,7 +68,7 @@ const Blog = () => {
                     {blog.category || 'General'}
                   </span>
                   <span className="text-xs text-gray-500 ml-3">
-                    {new Date(blog.createdAt).toLocaleDateString()}
+                    {new Date(blog.publishedAt || blog.createdAt).toLocaleDateString()}
                   </span>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
@@ -85,7 +85,7 @@ const Blog = () => {
           ))}
         </div>
       ) : (
-        <p className="text-gray-600">No blogs found for “{filter}”.</p>
+        <p className="text-gray-600">No blogs found for {filter}.</p>
       )}
     </div>
   );

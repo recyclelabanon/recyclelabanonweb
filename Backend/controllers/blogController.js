@@ -1,7 +1,7 @@
 // controllers/blogController.js
 const Blog = require('../models/Blog');
 const catchAsync = require('../utils/catchAsync');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../utils/errors');
+const { BadRequestError, NotFoundError } = require('../utils/errors');
 
 // GET all blogs (public)
 exports.getAllBlogs = catchAsync(async (req, res, next) => {

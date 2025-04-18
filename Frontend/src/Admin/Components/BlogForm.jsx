@@ -1,15 +1,14 @@
-// components/BlogForm.js
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const BlogForm = ({ initialData, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     title: '',
-    category: '',
-    excerpt: '',
     content: '',
+    summary: '', // Changed from excerpt to match schema
+    category: '',
+    coverImage: '', // Changed from imageUrl to match schema
     author: '',
-    imageUrl: '',
     videoUrl: '',
     tags: ''
   });
@@ -27,6 +26,10 @@ const BlogForm = ({ initialData, onSubmit, onCancel }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData(prev => ({ ...prev, coverImage: e.target.files[0] }));
   };
 
   const handleSubmit = (e) => {
@@ -87,13 +90,13 @@ const BlogForm = ({ initialData, onSubmit, onCancel }) => {
       </div>
       
       <div>
-        <label htmlFor="excerpt" className="block text-sm font-medium text-gray-700 mb-1">
-          Excerpt
+        <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
+          Summary
         </label>
         <textarea
-          id="excerpt"
-          name="excerpt"
-          value={formData.excerpt}
+          id="summary"
+          name="summary"
+          value={formData.summary}
           onChange={handleChange}
           required
           rows="2"
@@ -117,22 +120,21 @@ const BlogForm = ({ initialData, onSubmit, onCancel }) => {
       </div>
       
       <div>
-        <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-          Image URL
+        <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700 mb-1">
+          Cover Image
         </label>
         <input
-          type="text"
-          id="imageUrl"
-          name="imageUrl"
-          value={formData.imageUrl}
-          onChange={handleChange}
+          type="file"
+          id="coverImage"
+          name="coverImage"
+          onChange={handleFileChange}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        {formData.imageUrl && (
+        {typeof formData.coverImage === 'string' && formData.coverImage && (
           <div className="mt-2">
-            <p className="text-sm text-gray-500 mb-1">Preview:</p>
+            <p className="text-sm text-gray-500 mb-1">Current Image:</p>
             <img 
-              src={formData.imageUrl} 
+              src={formData.coverImage} 
               alt="Preview" 
               className="h-40 object-cover rounded-md"
             />
@@ -170,16 +172,7 @@ const BlogForm = ({ initialData, onSubmit, onCancel }) => {
         />
       </div>
       
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-        >
-          Submit
-        </button>
-      </div>
-      
-      <div className="flex justify-end mt-2">
+      <div className="flex justify-end space-x-4">
         <button
           type="button"
           onClick={onCancel}
@@ -187,18 +180,25 @@ const BlogForm = ({ initialData, onSubmit, onCancel }) => {
         >
           Cancel
         </button>
+        <button
+          type="submit"
+          className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
 };
+
 BlogForm.propTypes = {
   initialData: PropTypes.shape({
     title: PropTypes.string,
-    category: PropTypes.string,
-    excerpt: PropTypes.string,
     content: PropTypes.string,
+    summary: PropTypes.string,
+    category: PropTypes.string,
+    coverImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     author: PropTypes.string,
-    imageUrl: PropTypes.string,
     videoUrl: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
   }),

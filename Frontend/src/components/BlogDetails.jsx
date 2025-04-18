@@ -1,7 +1,5 @@
-// components/BlogDetail.jsx
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import { useBlogContext } from '../Admin/Context/BlogContext';
 
 const BlogDetail = () => {
@@ -12,99 +10,109 @@ const BlogDetail = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    (async () => {
+    const fetchBlog = async () => {
       try {
         setLoading(true);
         const data = await getBlogBySlug(slug);
         setBlog(data);
       } catch (err) {
-        console.error(err);
-        setError('Failed to load blog post');
+        console.error('Failed to fetch blog:', err);
+        setError('Failed to load this blog post. Please try again later.');
       } finally {
         setLoading(false);
       }
-    })();
+    };
+
+    if (slug) {
+      fetchBlog();
+    }
   }, [slug, getBlogBySlug]);
 
-  if (loading) return <div className="p-8 text-center">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-16 flex justify-center">
+        <div className="text-lg">Loading blog post...</div>
+      </div>
+    );
+  }
+
   if (error || !blog) {
     return (
-      <div className="p-8 text-center text-red-500">
-        {error || 'Blog post not found'}
-        <div className="mt-4">
-          <Link to="/blog" className="text-blue-500 hover:underline">
-            ← Back to all blogs
-          </Link>
+      <div className="container mx-auto px-4 py-16">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          {error || 'Blog post not found'}
         </div>
+        <Link to="/blog" className="mt-4 inline-block text-blue-600 hover:underline">
+          ← Back to all blogs
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="mb-8">
-        <Link to="/blog" className="inline-flex items-center text-gray-600 hover:text-gray-800">
-          <ArrowLeft size={18} className="mr-2" />
-          Back to Blog
-        </Link>
-      </div>
-
-      <article className="mb-12">
-        {/* Cover Image */}
-        {blog.coverImage && (
-          <img
-            src={blog.coverImage}
-            alt={blog.title}
-            className="w-full h-96 object-cover mb-8 rounded-lg"
-          />
-        )}
-
-        {/* Article Header */}
-        <header className="mb-8">
-          <div className="flex flex-wrap items-center gap-4 mb-4 text-gray-500">
-            <span className="inline-flex items-center">
-              <Calendar size={16} className="mr-1.5" />
-              {new Date(blog.createdAt).toLocaleDateString()}
+    <div className="container mx-auto px-4 py-12">
+      <Link to="/blog" className="text-green-600 hover:text-green-800 mb-4 inline-block">
+        ← Back to all blogs
+      </Link>
+      
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img 
+          src={blog.coverImage || '/default-blog.jpg'}
+          alt={blog.title}
+          className="w-full h-64 md:h-96 object-cover"
+        />
+        
+        <div className="p-6 md:p-8">
+          <div className="flex flex-wrap items-center mb-4">
+            <span className="text-sm font-semibold px-3 py-1 bg-green-100 text-green-800 rounded-full mr-3">
+              {blog.category || 'General'}
             </span>
-            <span className="inline-flex items-center">
-              <User size={16} className="mr-1.5" />
-              {blog.author}
+            <span className="text-sm text-gray-500">
+              Published on {new Date(blog.publishedAt || blog.createdAt).toDateString()}
             </span>
-            {blog.category && (
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                {blog.category}
-              </span>
-            )}
           </div>
-
-          <h1 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
-            {blog.title}
-          </h1>
-        </header>
-
-        {/* Article Content */}
-        <div className="prose prose-lg max-w-none mb-12">
-          {blog.content.split('\n').map((p, i) => (
-            <p key={i} className="mb-6">{p}</p>
-          ))}
-        </div>
-
-        {/* Tags */}
-        {blog.tags?.length > 0 && (
-          <div className="border-t pt-8">
-            <div className="flex items-center gap-3">
-              <Tag size={20} className="text-gray-500" />
+          
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{blog.title}</h1>
+          
+          <div className="flex items-center mb-8">
+            <span className="text-md text-gray-600">By {blog.author}</span>
+          </div>
+          
+          {blog.videoUrl && (
+            <div className="mb-8">
+              <iframe
+                title={blog.title}
+                width="100%"
+                height="400"
+                src={blog.videoUrl}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
+          
+          <div className="prose max-w-none">
+            {/* Render content - you might want to use a Markdown renderer here if your content is in Markdown */}
+            <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+          </div>
+          
+          {blog.tags && blog.tags.length > 0 && (
+            <div className="mt-8 pt-4 border-t border-gray-200">
               <div className="flex flex-wrap gap-2">
-                {blog.tags.map((tag, i) => (
-                  <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    {tag}
+                {blog.tags.map((tag, index) => (
+                  <span 
+                    key={index} 
+                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                  >
+                    #{tag}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
-        )}
-      </article>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+// src/admin/Pages/Blogs.js
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, Edit, Trash, Plus } from 'lucide-react';

@@ -23,11 +23,12 @@ import News from "./Admin/Pages/News.jsx";
 import Teams from "./Admin/Pages/Teams.jsx";
 import Programs from "./Admin/Pages/Programs.jsx";
 import Contact from "./Admin/Pages/Contact.jsx";
-import AdminBlogEdit from "./Admin/Pages/AdminBlogEdit.jsx";
 import BlogDetail from "./components/BlogDetails.jsx";
 import Login from "./Pages/Login.jsx";
 import Register from "./Pages/Register.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import NewBlog from "./Admin/Components/NewBlog.jsx";
+import EditBlog from "./Admin/Components/EditBlog.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -47,8 +48,8 @@ root.render(
           }>
             <Route index element={<Dashboard />} />
             <Route path="blogs" element={<Blogs />} />
-            <Route path="blogs/new" element={<AdminBlogEdit />} />
-            <Route path="blogs/edit/:id" element={<AdminBlogEdit />} />
+            <Route path="blogs/new" element={<NewBlog />} />
+            <Route path="blogs/edit/:id" element={<EditBlog />} />
             <Route path="teams" element={<Teams />} />
             <Route path="news" element={<News />} />
             <Route path="events" element={<Events />} />
