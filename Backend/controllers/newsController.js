@@ -2,25 +2,22 @@ const News = require('../models/News');
 const catchAsync = require('../utils/catchAsync');
 const { NotFoundError } = require('../utils/errors');
 
-
 // GET news statistics (monthly count of news articles)
 exports.getNewsStats = catchAsync(async (req, res, next) => {
-    const stats = await News.aggregate([
-      {
-        $group: {
-          _id: null,
-          totalNews: { $sum: 1 }
-        }
+  const stats = await News.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalNews: { $sum: 1 }
       }
-    ]);
+    }
+  ]);
   
-    res.status(200).json({
-      status: 'success',
-      data: { totalNews: stats.length > 0 ? stats[0].totalNews : 0 }
-    });
+  res.status(200).json({
+    status: 'success',
+    data: { totalNews: stats.length > 0 ? stats[0].totalNews : 0 }
   });
-  
-  
+});
 
 // GET all news
 exports.getAllNews = catchAsync(async (req, res, next) => {
@@ -68,6 +65,19 @@ exports.getNews = catchAsync(async (req, res, next) => {
   const news = await News.findById(req.params.id);
   if (!news) {
     return next(new NotFoundError('No news found with that ID'));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { news }
+  });
+});
+
+// GET single news item by slug
+exports.getNewsBySlug = catchAsync(async (req, res, next) => {
+  const news = await News.findOne({ slug: req.params.slug });
+  if (!news) {
+    return next(new NotFoundError('No news found with that slug'));
   }
 
   res.status(200).json({

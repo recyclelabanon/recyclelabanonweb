@@ -7,10 +7,10 @@ const router = express.Router();
 
 router.get('/admin/stats', authenticateUser, isAdmin, newsController.getNewsStats);
 
-
 // Public routes
 router.get('/', newsController.getAllNews);
 router.get('/:id', newsController.getNews);
+router.get('/slug/:slug', newsController.getNewsBySlug);
 
 // Admin routes: create, update, and delete news items
 router.post(

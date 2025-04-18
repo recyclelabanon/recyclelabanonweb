@@ -1,103 +1,118 @@
-import { useState } from 'react';
-import { Plus, Search, Edit2, Trash2 } from 'lucide-react';
+// src/admin/Pages/News.js
 
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FileText, Edit, Trash, Plus } from 'lucide-react';
+import { useNewsContext } from '../Context/NewsContext';
 
+function NewsAdmin() {
+  const { news, loading, error, deleteNews, refreshNews } = useNewsContext();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
 
-function News() {
-  const [searchTerm, setSearchTerm] = useState('');
+  useEffect(() => {
+    // Ensure we have the latest data
+    refreshNews();
+  }, [refreshNews]);
 
-  // Mock data - in real app, this would come from an API
-  const newsArticles = [
-    {
-      id: '1',
-      title: 'New Recycling Center Opens in Beirut',
-      excerpt: 'A state-of-the-art recycling facility has opened...',
-      author: 'Sarah Johnson',
-      date: '2024-02-20',
-      category: 'Infrastructure',
-      featured: true,
-    },
-    {
-      id: '2',
-      title: 'Lebanon Achieves Recycling Milestone',
-      excerpt: 'The country has reached a significant milestone...',
-      author: 'Mike Wilson',
-      date: '2024-02-19',
-      category: 'Achievement',
-      featured: false,
-    },
-  ];
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this news article?')) {
+      try {
+        setIsDeleting(true);
+        await deleteNews(id);
+        // News list should update automatically via context
+      } catch (err) {
+        setDeleteError('Failed to delete news article');
+        console.error(err);
+      } finally {
+        setIsDeleting(false);
+      }
+    }
+  };
 
-  const filteredNews = newsArticles.filter(article =>
-    article.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  if (loading) {
+    return <div className="p-4">Loading news articles...</div>;
+  }
 
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">News Articles</h1>
-        <button className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-green-700">
-          <Plus size={20} />
-          <span>New Article</span>
+  if (error) {
+    return (
+      <div className="p-4 text-red-500">
+        Error loading news: {error}
+        <button 
+          onClick={refreshNews}
+          className="ml-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Retry
         </button>
       </div>
+    );
+  }
 
-      <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm">
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            placeholder="Search news..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
-        </div>
-        <select className="border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-          <option value="all">All Categories</option>
-          <option value="infrastructure">Infrastructure</option>
-          <option value="achievement">Achievement</option>
-          <option value="community">Community</option>
-        </select>
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">News Articles</h1>
+        <Link
+          to="/admin/news/new"
+          className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+        >
+          <Plus className="mr-2" size={16} />
+          Add New Article
+        </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredNews.map((article) => (
-          <div key={article.id} className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex justify-between">
-              <div className="flex-1">
-                <div className="flex items-center space-x-2">
-                  {article.featured && (
-                    <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
-                      Featured
-                    </span>
-                  )}
-                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                    {article.category}
-                  </span>
+      {deleteError && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {deleteError}
+        </div>
+      )}
+
+      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <ul className="divide-y divide-gray-200">
+          {news.length > 0 ? (
+            news.map((item) => (
+              <li key={item._id}>
+                <div className="px-4 py-4 sm:px-6 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <FileText className="text-gray-500 mr-3" />
+                    <div>
+                      <h3 className="text-lg font-medium">{item.title}</h3>
+                      <div className="mt-1 text-sm text-gray-500">
+                        <span>{item.category}</span>
+                        <span className="mx-2">•</span>
+                        <span>{new Date(item.publishedAt || item.createdAt).toLocaleDateString()}</span>
+                        <span className="mx-2">•</span>
+                        <span>{item.author}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Link
+                      to={`/admin/news/edit/${item._id}`}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      <Edit size={18} />
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      disabled={isDeleting}
+                      className="text-red-600 hover:text-red-800 disabled:opacity-50"
+                    >
+                      <Trash size={18} />
+                    </button>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mt-2">{article.title}</h3>
-                <p className="text-gray-600 mt-2">{article.excerpt}</p>
-                <div className="mt-4 text-sm text-gray-500">
-                  <span>{article.author}</span>
-                  <span className="mx-2">•</span>
-                  <span>{article.date}</span>
-                </div>
-              </div>
-              <div className="flex space-x-2">
-                <button className="text-blue-600 hover:text-blue-800">
-                  <Edit2 size={18} />
-                </button>
-                <button className="text-red-600 hover:text-red-800">
-                  <Trash2 size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+              </li>
+            ))
+          ) : (
+            <li className="px-4 py-5 text-center text-gray-500">
+              No news articles yet. Click &quot;Add New Article&quot; to create one.
+            </li>
+          )}
+        </ul>
       </div>
     </div>
   );
 }
 
-export default News;
+export default NewsAdmin;

@@ -20,6 +20,10 @@ const blogSchema = new mongoose.Schema(
       trim: true,
       maxlength: [200, 'A summary must have less than 200 characters']
     },
+    category: {
+      type: String,
+      default: 'General'
+    },
     coverImage: {
       type: String,
       default: 'default-blog.jpg'
