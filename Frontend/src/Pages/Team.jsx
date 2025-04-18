@@ -1,79 +1,36 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
 import TeamMember from '../components/TeamMember';
 import Partners from '../components/Partners';
-import { useNavigate } from 'react-router-dom';
-import { img16, img28, img30 } from '../assets/Image';
+import { useTeamContext } from '../Admin/Context/TeamContext';
 
 const Team = () => {
+  const {
+    teams,
+    loading,
+    error,
+    refreshTeams,
+  } = useTeamContext();
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    refreshTeams();
+  }, [refreshTeams]);
+
+  const categorizedTeams = teams.reduce((acc, member) => {
+    const cat = member.category || 'General';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(member);
+    return acc;
+  }, {});
+
   const handleClick = () => {
     navigate("/joinus");
     window.scrollTo(0, 0);
   };
-
-  const mainTeam = [
-    {
-      name: 'Dr. Rachel Rosenbaum',
-      role: 'Regenerate Hub Product & Data Coordinator',
-      description: 'An anthropologist at the University of Arizona, focusing on the politics of infrastructure & circular economy solutions.',
-      image: img30
-    },
-    {
-      name: 'Nariman Hamdan',
-      role: 'EcoSouk Store Manager',
-      description: 'An environmental activist, retailer & marathon runner with a resourceful passion for supporting communities. Active blood donor & volunteers with the Lebanese Red Cross & Civil Defense.',
-      image: img28
-    },
-    {
-      name: 'Kevin Matar',
-      role: 'TerraPods Lead',
-      description: 'An environmental architect & activist with a specialisation in Advanced Ecological Buildings & Biocities. Exploring materials, completed research programme on mycelium & construction waste.',
-      image: img16
-    },
-  ];
-
-  const advisoryBoard = [
-    {
-      name: 'Dr. Rembrandt Koppelaar',
-      role: 'Head of Circular Economy - Research and Innovation Lead',
-      description: "Senior expert in Circular Economy, Economics, Modelling, environmental material/product assessment, and techno-economic analysis. PhD from Imperial College London's Centre for Environmental Policy.",
-      image: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      name: 'Chantale Fahmi',
-      role: 'Edging Big Data thru Arts & Culture',
-      description: "Lebanese photographer with masters in Art Criticism and Curatorial Studies. Documents social relations and nature's impact on human life.",
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      name: "Ala'a Shehabi",
-      role: 'Data Management Lead',
-      description: 'British-born economics lecturer, activist and writer with PhD in Econometrics from Imperial College London. Deputy director of the Institute for Global Prosperity at University College London.',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-    },
-  ];
-
-  const boardMembers = [
-    {
-      name: 'Joslin F. Kehdy',
-      role: 'Founder & Director',
-      description: 'Studied Mandarin Chinese in Guangzhou, managed operations of a design-build architectural engineering firm in Hawaii, and organized food & travel conferences between England & Lebanon.',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      name: 'Adla Kehdy',
-      role: 'Secretary',
-      description: 'Senior key account manager at Saba IP & Co with 10 years of experience in intellectual property services industry.',
-      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      name: 'Antranik Arkanian',
-      role: 'Treasurer',
-      description: 'Specialized in human rights and democratization processes after a decade of experience in private sector business development.',
-      image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-    },
-  ];
 
   return (
     <div className="pt-16">
@@ -110,30 +67,25 @@ const Team = () => {
         </div>
       </Section>
 
-      <Section title="Core Team" dark>
-        <div className="flex flex-wrap justify-center gap-12">
-          {mainTeam.map((member, index) => (
-            <TeamMember key={index} {...member} />
-          ))}
-        </div>
-      </Section>
+      {loading && <p className="text-center text-lg text-gray-600">Loading team members...</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
 
-      <Section title="Advisory Board" className='content-center'> 
-        <div className="flex flex-wrap justify-center gap-12">
-          {advisoryBoard.map((member, index) => (
-            <TeamMember key={index} {...member} />
-          ))}
-        </div>
-      </Section>
+      {!loading && !error && Object.entries(categorizedTeams).map(([category, members]) => (
+        <Section key={category} title={category} dark>
+          <div className="flex flex-wrap justify-center gap-12">
+            {members.map(member => (
+              <TeamMember
+                key={member._id}
+                name={member.fullName}
+                role={member.position}
+                description={member.introduction}
+                image={member.profilePic}
+              />
+            ))}
+          </div>
+        </Section>
+      ))}
 
-      <Section title="Board Members" dark>
-        <div className="flex flex-wrap justify-center gap-12">
-          {boardMembers.map((member, index) => (
-            <TeamMember key={index} {...member} />
-          ))}
-        </div>
-      </Section>
-      
       <Partners />
     </div>
   );

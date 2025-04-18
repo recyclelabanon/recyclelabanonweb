@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import { BlogProvider } from "./Admin/Context/BlogContext.jsx";
 import { AuthProvider } from "./Admin/Context/AuthContext.jsx";
 import { NewsProvider } from "./Admin/Context/NewsContext.jsx";
+import { TeamProvider } from "./Admin/Context/TeamContext.jsx";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
         <main className="flex-grow">
           <BlogProvider>
             <NewsProvider>
-              <Outlet />
+              <TeamProvider>
+                <Outlet />
+              </TeamProvider>
             </NewsProvider>
           </BlogProvider>
         </main>

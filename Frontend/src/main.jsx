@@ -18,7 +18,7 @@ import Layout from "./Admin/Components/Layout.jsx";
 import Dashboard from "./Admin/Pages/Dashboard.jsx";
 import Blogs from "./Admin/Pages/Blogs.jsx";
 import Events from "./Admin/Pages/Events.jsx";
-import Teams from "./Admin/Pages/Teams.jsx";
+import Teams from "./Admin/Pages/TeamsAdmin.jsx";
 import Programs from "./Admin/Pages/Programs.jsx";
 import Contact from "./Admin/Pages/Contact.jsx";
 import BlogDetail from "./components/BlogDetails.jsx";
@@ -32,6 +32,8 @@ import NewsAdmin from "./Admin/Pages/News.jsx";
 import EditNews from "./Admin/Components/EditNews.jsx";
 import NewsPage from "./Pages/News.jsx";
 import NewsDetail from "./components/BlogDetails.jsx";
+import NewTeam from "./Admin/Components/NewTeam.jsx";
+import EditTeam from "./Admin/Components/EditTeam.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -57,6 +59,8 @@ root.render(
             <Route path="news/new" element={<NewNews />} />
             <Route path="news/edit/:id" element={<EditNews />} />
             <Route path="teams" element={<Teams />} />
+            <Route path="teams/new" element={<NewTeam />} />
+            <Route path="teams/edit/:id" element={<EditTeam />} />
             <Route path="events" element={<Events />} />
             <Route path="programs" element={<Programs />} />
             <Route path="contacts" element={<Contact />} />
