@@ -25,6 +25,9 @@ import Programs from "./Admin/Pages/Programs.jsx";
 import Contact from "./Admin/Pages/Contact.jsx";
 import AdminBlogEdit from "./Admin/Pages/AdminBlogEdit.jsx";
 import BlogDetail from "./components/BlogDetails.jsx";
+import Login from "./Pages/Login.jsx";
+import Register from "./Pages/Register.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,7 +35,16 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="admin" element={<Layout />}>
+          {/* Auth Routes */}
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          
+          {/* Admin Routes - Protected */}
+          <Route path="admin" element={
+            <PrivateRoute>
+              <Layout />
+            </PrivateRoute>
+          }>
             <Route index element={<Dashboard />} />
             <Route path="blogs" element={<Blogs />} />
             <Route path="blogs/new" element={<AdminBlogEdit />} />
@@ -44,6 +56,8 @@ root.render(
             <Route path="contacts" element={<Contact />} />
             <Route path="*" element={<h1>Page not found</h1>} />
           </Route>
+          
+          {/* Public Routes */}
           <Route index element={<Home />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="initiatives" element={<Initiatives />} />
