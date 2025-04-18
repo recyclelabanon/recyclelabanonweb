@@ -5,6 +5,7 @@ import { BlogProvider } from "./Admin/Context/BlogContext.jsx";
 import { AuthProvider } from "./Admin/Context/AuthContext.jsx";
 import { NewsProvider } from "./Admin/Context/NewsContext.jsx";
 import { TeamProvider } from "./Admin/Context/TeamContext.jsx";
+import { EventProvider } from "./Admin/Context/EventContext.jsx";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
           <BlogProvider>
             <NewsProvider>
               <TeamProvider>
-                <Outlet />
+                <EventProvider>
+                  <Outlet />
+                </EventProvider>
               </TeamProvider>
             </NewsProvider>
           </BlogProvider>

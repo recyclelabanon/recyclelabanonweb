@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
       delete axios.defaults.headers.common['Authorization'];
     }
   }, [token]);
+  // Set up axios interceptors for error handling
 
   // Check if user is authenticated on mount
   useEffect(() => {

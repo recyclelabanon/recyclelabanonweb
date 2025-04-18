@@ -23,7 +23,6 @@ export const TeamProvider = ({ children }) => {
       setLoading(true);
       const res = await axios.get(`${API_URL}/teams`);
       const fetched = res.data.data.team || [];
-      console.log('Fetched teams:', fetched);
       setTeams(fetched);
       const uniqueCats = [...new Set(fetched.map(member => member.category || 'General'))];
       setCategories(uniqueCats);

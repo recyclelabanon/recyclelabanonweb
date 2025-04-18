@@ -33,7 +33,7 @@ export const BlogProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, []); // empty deps so it's stable
+  }, []);
   
   useEffect(() => {
     fetchBlogs();
